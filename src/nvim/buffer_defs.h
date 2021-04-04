@@ -900,12 +900,19 @@ struct file_buffer {
  * This is using a linked list, because the number of differences is expected
  * to be reasonable small.  The list is sorted on lnum.
  */
+typedef struct diffcomparisonlines_S diffcomparisonlines_T;
+struct diffcomparisonlines_S{
+  int size; // initial line number for a diff
+  // int* mem;
+  int mem[100]; // dynamically alocate this
+  // TODO a diff with more than 100 lines would break this
+};
 typedef struct diffblock_S diff_T;
 struct diffblock_S {
   diff_T      *df_next;
   linenr_T df_lnum[DB_COUNT];           // line number in buffer
   linenr_T df_count[DB_COUNT];          // nr of inserted/changed lines
-  // linenr_T thresh[DB_COUNT][DB_COUNT]; // for diffing below threshold only
+  diffcomparisonlines_T comparisonlines[DB_COUNT][DB_COUNT]; // for diffing below threshold only
   bool redraw; // calculate which lines should be diffed with eachother
 };
 

@@ -2347,17 +2347,45 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
 	  fprintf(fp,"original buffer:\n");
 	  char_u* lineoriginal;
 	  char_u* linenew;
+	  int comparisonline=dp->df_lnum[j];
 	  for(int k=0;k<dp->df_count[i];k++){
 	    int thislinenumber=dp->df_lnum[i]+k;
 	    lineoriginal=ml_get_buf(curtab->tp_diffbuf[i],thislinenumber,false);
-	    fprintf(fp,"k:%i : %s \n",k,lineoriginal);
+	    fprintf(fp,"k:%i lineoriginal: %s \n",k,lineoriginal);
+	    dp->comparisonlines[i][j].mem[k]=-1; // initialize to -1
+	    // get the lowest score, set the comparison line to that
+	    int lowestscore=INT_MAX;
+	    for(int cl=comparisonline;cl<dp->df_lnum[j]+dp->df_count[j];cl++){
+	      linenew=ml_get_buf(curtab->tp_diffbuf[j],cl,false);
+	      int score=levenshtein(lineoriginal,linenew);
+	      fprintf(fp,"linenew: %s ->score: %i",linenew,score);
+	      if(score<lowestscore){
+		// thislinenumber -> cl
+		// for dp->something[i][j]->linemap[k]=cl;
+		if(k > dp->comparisonlines[i][j].size){
+		  // free and adjust with larger size
+		}
+		dp->comparisonlines[i][j].mem[k]=cl;
+		lowestscore=score;
+		fprintf(fp,"->WINNER:setting comparisonline to:%i \n",cl);
+		comparisonline=cl+1;
+	      }else fprintf(fp,"\n");
+	    }
 	  }
-	  fprintf(fp,"comparison buffer:\n");
-	  for(int k=0;k<dp->df_count[j];k++){
-	    int thislinenumber=dp->df_lnum[i]+k;
-	    linenew=ml_get_buf(curtab->tp_diffbuf[j],thislinenumber,false);
-	    fprintf(fp,"k:%i : %s \n",k,linenew);
-	  }
+
+
+	  // for(int k=0;k<dp->df_count[i];k++){
+	  //   int thislinenumber=dp->df_lnum[i]+k;
+	  //   lineoriginal=ml_get_buf(curtab->tp_diffbuf[i],thislinenumber,false);
+	  //   fprintf(fp,"k:%i : %s \n",k,lineoriginal);
+	  // }
+	  // fprintf(fp,"comparison buffer:\n");
+	  // for(int k=0;k<dp->df_count[j];k++){
+	  //   int thislinenumber=dp->df_lnum[i]+k;
+	  //   linenew=ml_get_buf(curtab->tp_diffbuf[j],thislinenumber,false);
+	  //   fprintf(fp,"k:%i : %s \n",k,linenew);
+	  // }
+
 	}
       }
     }
@@ -2369,12 +2397,18 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
   for (i = 0; i < DB_COUNT; ++i) {
     if ((curtab->tp_diffbuf[i] != NULL) && (i != idx)) {
       // Skip lines that are not in the other change (filler lines).
-      if (off >= dp->df_count[i]) {
-        continue;
+      // if (off >= dp->df_count[i]) {
+      //   continue;
+      // }
+      int comparl=dp->comparisonlines[idx][i].mem[
+	lnum - dp->df_lnum[idx]  ];
+      if(comparl==-1){
+	continue;
       }
       added = false;
+
       line_new = ml_get_buf(curtab->tp_diffbuf[i],
-                            dp->df_lnum[i] + off, false);
+                            comparl, false);
 
       // Search for start of difference
       si_org = si_new = 0;
