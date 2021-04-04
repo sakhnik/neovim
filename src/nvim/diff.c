@@ -2347,6 +2347,7 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
 	  fprintf(fp,"original buffer:\n");
 	  char_u* lineoriginal;
 	  char_u* linenew;
+	  int skipped=0;
 	  int comparisonline=dp->df_lnum[j];
 	  for(int k=0;k<dp->df_count[i];k++){
 	    int thislinenumber=dp->df_lnum[i]+k;
@@ -2355,23 +2356,34 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
 	    dp->comparisonlines[i][j].mem[k]=-1; // initialize to -1
 	    // get the lowest score, set the comparison line to that
 	    int lowestscore=INT_MAX;
-	    for(int cl=comparisonline;cl<dp->df_lnum[j]+dp->df_count[j];cl++){
-	      linenew=ml_get_buf(curtab->tp_diffbuf[j],cl,false);
-	      int score=levenshtein(lineoriginal,linenew);
-	      fprintf(fp,"linenew: %s ->score: %i",linenew,score);
-	      if(score<lowestscore){
-		// thislinenumber -> cl
-		// for dp->something[i][j]->linemap[k]=cl;
-		if(k > dp->comparisonlines[i][j].size){
-		  // free and adjust with larger size
+	    if(comparisonline<dp->df_lnum[j]+dp->df_count[j]){
+	      int d_skipped=0;
+	      int comparisonlinestart=comparisonline;
+	      for(int cl=comparisonline;cl<dp->df_lnum[j]+dp->df_count[j];cl++){
+		linenew=ml_get_buf(curtab->tp_diffbuf[j],cl,false);
+		int score=levenshtein(lineoriginal,linenew);
+		fprintf(fp,"linenew: %s ->score: %i",linenew,score);
+		if(score<lowestscore){
+		  // thislinenumber -> cl
+		  // for dp->something[i][j]->linemap[k]=cl;
+		  if(k > dp->comparisonlines[i][j].size){
+		    // free and adjust with larger size
+		  }
+		  dp->comparisonlines[i][j].mem[k]=cl;
+		  lowestscore=score;
+		  fprintf(fp,"->WINNER:setting comparisonline to:%i \n",cl);
+		  d_skipped=(cl-comparisonlinestart);
+		  comparisonline=cl+1;
+		}else {
+		  // skipped++;
+		  fprintf(fp,"\n");
 		}
-		dp->comparisonlines[i][j].mem[k]=cl;
-		lowestscore=score;
-		fprintf(fp,"->WINNER:setting comparisonline to:%i \n",cl);
-		comparisonline=cl+1;
-	      }else fprintf(fp,"\n");
-	    }
+	      }
+	      skipped+=d_skipped;
+	    }else skipped++;
+	    // add remaining lines to skipped
 	  }
+	  // add skipped to this dp[i][j] somewhere
 
 
 	  // for(int k=0;k<dp->df_count[i];k++){
