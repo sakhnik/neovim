@@ -1058,6 +1058,9 @@ static int diff_file_internal(diffio_T *diffio)
   emit_cfg.ctxlen = 0;  // don't need any diff_context here
   emit_cb.priv = &diffio->dio_diff;
   emit_cb.outf = xdiff_out;
+  // FILE*fp=fopen("debug.txt","a");
+  // fprintf(fp,"\nstart debug-------------------------------------\n");
+  // fclose(fp);
   if (xdl_diff(&diffio->dio_orig.din_mmfile,
                &diffio->dio_new.din_mmfile,
                &param, &emit_cfg, &emit_cb) < 0) {
@@ -2245,6 +2248,42 @@ bool diffopt_closeoff(void)
   return (diff_flags & DIFF_CLOSE_OFF) != 0;
 }
 
+int min(int a, int b, int c)
+{
+	if(a <= b && a <= c)
+	{
+		return a;
+	}
+	else if(b <= a && b <= c)
+	{
+		return b;
+	}
+	else if(c <= a && c <= b)
+	{
+		return c;
+	}
+	return 0;
+}
+
+int levenshtein(char_u *s1, char_u *s2) {
+    unsigned int x, y, s1len, s2len;
+    s1len = strlen((char*)s1);
+    s2len = strlen((char*)s2);
+    if(s2len>1000 || s2len>10000)return INT_MAX;
+    // unsigned int matrix[s2len+1][s1len+1];
+    unsigned int matrix[1000][1000];
+    matrix[0][0] = 0;
+    for (x = 1; x <= s2len; x++)
+        matrix[x][0] = matrix[x-1][0] + 1;
+    for (y = 1; y <= s1len; y++)
+        matrix[0][y] = matrix[0][y-1] + 1;
+    for (x = 1; x <= s2len; x++)
+        for (y = 1; y <= s1len; y++)
+            matrix[x][y] = min(matrix[x-1][y] + 1, matrix[x][y-1] + 1, matrix[x-1][y-1] + (s1[y-1] == s2[x-1] ? 0 : 1));
+
+    return(matrix[s2len][s1len]);
+}
+
 /// Find the difference within a changed line.
 ///
 /// @param  wp      window whose current buffer to check
@@ -2289,6 +2328,44 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
 
   int off = lnum - dp->df_lnum[idx];
   int i;
+  FILE*fp=fopen("debug.txt","a");
+  fprintf(fp,"pointer: %p off:%i \n",(void*)dp,off);
+  // lnum
+  // figure out which lines to compare to what
+  // fprintf(fp,"compare this: %s \n", line_org);
+  if(dp->redraw){
+    fprintf(fp,"redraw all diffs\n");
+    // check which line numbers to compare to each other
+    for(i=0;i<DB_COUNT;++i){
+      for(int j=0;j<DB_COUNT;++j){
+	if((curtab->tp_diffbuf[i]!=NULL)&&(curtab->tp_diffbuf[j]!=NULL)&&(i!=j)){
+	  fprintf(fp,"db: %i, df_lnum: %li, df_count: %lu \n",i,dp->df_lnum[i],dp->df_count[i]);
+	  // create an list of line numbers to compare to other line numbers
+	  fprintf(fp,"comparison %i to %i is valid\n",i,j);
+	  // line from this buffer
+	  // start line:
+	  fprintf(fp,"original buffer:\n");
+	  char_u* lineoriginal;
+	  char_u* linenew;
+	  for(int k=0;k<dp->df_count[i];k++){
+	    int thislinenumber=dp->df_lnum[i]+k;
+	    lineoriginal=ml_get_buf(curtab->tp_diffbuf[i],thislinenumber,false);
+	    fprintf(fp,"k:%i : %s \n",k,lineoriginal);
+	  }
+	  fprintf(fp,"comparison buffer:\n");
+	  for(int k=0;k<dp->df_count[j];k++){
+	    int thislinenumber=dp->df_lnum[i]+k;
+	    linenew=ml_get_buf(curtab->tp_diffbuf[j],thislinenumber,false);
+	    fprintf(fp,"k:%i : %s \n",k,linenew);
+	  }
+	}
+      }
+    }
+  }
+  fclose(fp);
+  // on first redraw iterate over all the diffs and figure out which lines to compare
+  dp->redraw=false;
+
   for (i = 0; i < DB_COUNT; ++i) {
     if ((curtab->tp_diffbuf[i] != NULL) && (i != idx)) {
       // Skip lines that are not in the other change (filler lines).
@@ -2326,6 +2403,7 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
       si_new -= utf_head_off(line_new, line_new + si_new);
 
       if (*startp > si_org) {
+        // *startp = si_org+10;
         *startp = si_org;
       }
 
@@ -2367,6 +2445,7 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
         }
 
         if (*endp < ei_org) {
+          // *endp = ei_org+10;
           *endp = ei_org;
         }
       }
@@ -3136,6 +3215,9 @@ static int parse_diff_unified(char_u        *line,
 ///
 static int xdiff_out(void *priv, mmbuffer_t *mb, int nbuf)
 {
+  // FILE*fp=fopen("debug.txt","a");
+  // fprintf(fp,"\nptr:\n %s",mb->ptr);
+  // fclose(fp);
   diffout_T *dout = (diffout_T *)priv;
   char_u    *p;
 
