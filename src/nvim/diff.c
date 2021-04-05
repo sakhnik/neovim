@@ -2354,6 +2354,7 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
 	    lineoriginal=ml_get_buf(curtab->tp_diffbuf[i],thislinenumber,false);
 	    fprintf(fp,"k:%i lineoriginal: %s \n",k,lineoriginal);
 	    dp->comparisonlines[i][j].mem[k]=-1; // initialize to -1
+	    // TODO stop the reverse search at this df_count[j] to ensure in bounds search
 	    // get the lowest score, set the comparison line to that
 	    int lowestscore=INT_MAX;
 	    if(comparisonline<dp->df_lnum[j]+dp->df_count[j]){
@@ -2383,7 +2384,10 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
 	    }else skipped++;
 	    // add remaining lines to skipped
 	  }
-	  // add skipped to this dp[i][j] somewhere
+	  // keep track of how many have been skipped
+	  if(dp->skipped[i]<skipped){
+	    dp->skipped[i]=skipped;
+	  }
 
 
 	  // for(int k=0;k<dp->df_count[i];k++){
@@ -2401,6 +2405,18 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
 	}
       }
     }
+    // assign the preferred buffer
+    // int leastskippedbuffer=-1;
+    int leastnumberofskips=INT_MAX;
+    for(i=0;i<DB_COUNT;i++){
+      if((curtab->tp_diffbuf[i]!=NULL)){
+	if(dp->skipped[i] < leastnumberofskips){
+	  leastnumberofskips=dp->skipped[i];
+	  dp->preferredbuffer=i;
+	}
+      }
+    }
+
   }
   fclose(fp);
   // on first redraw iterate over all the diffs and figure out which lines to compare
@@ -2412,8 +2428,29 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
       // if (off >= dp->df_count[i]) {
       //   continue;
       // }
-      int comparl=dp->comparisonlines[idx][i].mem[
-	lnum - dp->df_lnum[idx]  ];
+
+      // get the line to compare to
+      int comparl;
+      if(dp->preferredbuffer==idx){
+	comparl=dp->comparisonlines[idx][i].mem[ lnum - dp->df_lnum[idx]  ];
+      }else{
+	// searching for this line number:
+	// lnum;
+	// find it with a search throgh these lines
+	// comparl=dp->comparisonlines[preferredbuffer][idx];
+	// endpoint: 
+	// dp->df_count[preferredbuffer];
+	bool foundline=false;
+	for(int _s=0;_s<dp->df_count[dp->preferredbuffer];_s++){
+	  if(dp->comparisonlines[dp->preferredbuffer][idx].mem[_s]==lnum){
+	    foundline=true;
+	    comparl=_s+dp->df_lnum[dp->preferredbuffer];
+	  }
+	}
+	if(!foundline){
+	  comparl=-1;
+	}
+      }
       if(comparl==-1){
 	continue;
       }

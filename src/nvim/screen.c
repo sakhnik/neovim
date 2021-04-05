@@ -744,6 +744,10 @@ static void win_update(win_T *wp, Providers *providers)
 	  //       	  dp->thresh[i][j]=-1;
 	  //         }
 	  // }
+	  for(int i=0;i<DB_COUNT;i++){
+	    dp->skipped[i]=INT_MIN;
+	  }
+	  dp->preferredbuffer=-1;
 	  dp->redraw=true;
   }
   fprintf(fp,"window update called\n");

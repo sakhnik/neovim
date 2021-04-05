@@ -9,14 +9,14 @@ endif
 set shortmess=aoO
 badd +80 README.md
 badd +1 term://.//141672:/bin/bash
-badd +2364 src/nvim/diff.c
+badd +2295 src/nvim/diff.c
 badd +2672 src/nvim/ex_cmds.c
 badd +1560 src/nvim/buffer.c
 badd +1 ~/projects/alg/AddString/main.cpp
 badd +230 src/nvim/ex_eval.c
 badd +25 term://.//141707:/bin/bash
 badd +1 ~/.local/share/nvim/log
-badd +742 src/nvim/screen.c
+badd +744 src/nvim/screen.c
 badd +108 CMakeLists.txt
 badd +910 src/nvim/buffer_defs.h
 badd +1187 src/nvim/move.c
@@ -42,7 +42,7 @@ badd +3 src/nvim/xdiff/COPYING
 badd +530 term://.//158323:/bin/bash
 badd +77 src/nvim/garray.c
 badd +211 term://.//159345:/bin/bash
-badd +1 term://.//42174:/bin/bash
+badd +1 term://.//78775:/bin/bash
 badd +67 src/nvim/strings.c
 badd +1 src/nvim/garray.h
 badd +1550 runtime/syntax/2html.vim
@@ -58,16 +58,18 @@ badd +870 runtime/doc/usr_41.txt
 badd +3513 runtime/doc/eval.txt
 badd +1 build/bin/fileb.txt
 badd +452 src/nvim/globals.h
-badd +1 term://.//42200:/bin/bash
-badd +1 term://.//42226:/bin/bash
+badd +1 term://.//78801:/bin/bash
+badd +1 term://.//78827:/bin/bash
 badd +7 src/nvim/pos.h
 badd +42 src/nvim/memory.c
 badd +33 test/symbolic/klee/nvim/memory.c
 badd +1 build/bin/filea.txt
 badd +1540 src/nvim/mark.c
 badd +56 term://.//43900:/bin/bash
-badd +2350 fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c
+badd +2351 fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c
 badd +609 term://.//56286:/bin/bash
+badd +1025 term://.//82961:/bin/bash
+badd +0 term://.//109503:/bin/bash
 argglobal
 %argdel
 $argadd ./
@@ -398,11 +400,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 3265 - ((0 * winheight(0) + 15) / 31)
+let s:l = 3314 - ((0 * winheight(0) + 15) / 31)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-3265
+3314
 normal! 03|
 lcd ~/projects/neovim
 wincmd w
@@ -464,7 +466,7 @@ normal! 027|
 lcd ~/projects/neovim
 wincmd w
 argglobal
-if bufexists("term://.//42174:/bin/bash") | buffer term://.//42174:/bin/bash | else | edit term://.//42174:/bin/bash | endif
+if bufexists("term://.//78775:/bin/bash") | buffer term://.//78775:/bin/bash | else | edit term://.//78775:/bin/bash | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -846,11 +848,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 2440 - ((20 * winheight(0) + 20) / 40)
+let s:l = 2489 - ((20 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2440
+2489
 normal! 027|
 lcd ~/projects/neovim
 wincmd w
@@ -865,11 +867,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 2480 - ((21 * winheight(0) + 20) / 40)
+let s:l = 2529 - ((21 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2480
+2529
 normal! 0
 lcd ~/projects/neovim
 wincmd w
@@ -963,11 +965,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 3214 - ((22 * winheight(0) + 25) / 51)
+let s:l = 3263 - ((22 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-3214
+3263
 normal! 05|
 lcd ~/projects/neovim
 wincmd w
@@ -1041,11 +1043,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 3086 - ((21 * winheight(0) + 25) / 51)
+let s:l = 3090 - ((21 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-3086
+3090
 normal! 09|
 lcd ~/projects/neovim
 wincmd w
@@ -1114,7 +1116,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 8) / 17)
+let s:l = 6 - ((0 * winheight(0) + 8) / 17)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -1152,12 +1154,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 2358 - ((15 * winheight(0) + 16) / 33)
+let s:l = 2384 - ((41 * winheight(0) + 16) / 33)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2358
-normal! 015|
+2384
+normal! 0
 lcd ~/projects/neovim
 wincmd w
 argglobal
@@ -1171,16 +1173,16 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 914 - ((13 * winheight(0) + 8) / 17)
+let s:l = 914 - ((0 * winheight(0) + 8) / 17)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 914
-normal! 012|
+normal! 05|
 lcd ~/projects/neovim
 wincmd w
 argglobal
-if bufexists("term://.//42200:/bin/bash") | buffer term://.//42200:/bin/bash | else | edit term://.//42200:/bin/bash | endif
+if bufexists("term://.//78801:/bin/bash") | buffer term://.//78801:/bin/bash | else | edit term://.//78801:/bin/bash | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -1189,51 +1191,11 @@ setlocal fdl=20
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 294 - ((16 * winheight(0) + 8) / 17)
+let s:l = 17 - ((16 * winheight(0) + 8) / 17)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-294
-normal! 030|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("~/projects/neovim/src/nvim/screen.c") | buffer ~/projects/neovim/src/nvim/screen.c | else | edit ~/projects/neovim/src/nvim/screen.c | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-2011,2345fold
-2011
-normal! zc
-let s:l = 2352 - ((346 * winheight(0) + 16) / 33)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2352
-normal! 07|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("term://.//42226:/bin/bash") | buffer term://.//42226:/bin/bash | else | edit term://.//42226:/bin/bash | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 10024 - ((23 * winheight(0) + 18) / 37)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-10024
+17
 normal! 0
 lcd ~/projects/neovim
 wincmd w
@@ -1248,17 +1210,57 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-751,1339fold
-1341,1542fold
-751
+2015,2349fold
+2015
 normal! zc
-1341
-normal! zc
-let s:l = 748 - ((12 * winheight(0) + 6) / 13)
+let s:l = 2356 - ((346 * winheight(0) + 16) / 33)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-748
+2356
+normal! 07|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("term://.//78827:/bin/bash") | buffer term://.//78827:/bin/bash | else | edit term://.//78827:/bin/bash | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 6950 - ((36 * winheight(0) + 18) / 37)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+6950
+normal! 0
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/screen.c") | buffer ~/projects/neovim/src/nvim/screen.c | else | edit ~/projects/neovim/src/nvim/screen.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+755,1343fold
+1345,1546fold
+755
+normal! zc
+1345
+normal! zc
+let s:l = 745 - ((9 * winheight(0) + 6) / 13)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+745
 normal! 09|
 lcd ~/projects/neovim
 wincmd w
@@ -1278,190 +1280,6 @@ exe '7resize ' . ((&lines * 37 + 27) / 54)
 exe 'vert 7resize ' . ((&columns * 97 + 136) / 273)
 exe '8resize ' . ((&lines * 13 + 27) / 54)
 exe 'vert 8resize ' . ((&columns * 97 + 136) / 273)
-tabedit ~/projects/neovim/src/nvim/diff.c
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-wincmd _ | wincmd |
-vsplit
-2wincmd h
-wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
-set nosplitbelow
-set nosplitright
-wincmd t
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-exe 'vert 1resize ' . ((&columns * 20 + 136) / 273)
-exe '2resize ' . ((&lines * 13 + 27) / 54)
-exe 'vert 2resize ' . ((&columns * 170 + 136) / 273)
-exe '3resize ' . ((&lines * 37 + 27) / 54)
-exe 'vert 3resize ' . ((&columns * 95 + 136) / 273)
-exe '4resize ' . ((&lines * 37 + 27) / 54)
-exe 'vert 4resize ' . ((&columns * 74 + 136) / 273)
-exe '5resize ' . ((&lines * 25 + 27) / 54)
-exe 'vert 5resize ' . ((&columns * 81 + 136) / 273)
-exe '6resize ' . ((&lines * 25 + 27) / 54)
-exe 'vert 6resize ' . ((&columns * 81 + 136) / 273)
-argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal nofen
-silent! normal! zE
-let s:l = 2269 - ((27 * winheight(0) + 25) / 51)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2269
-normal! 0
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c") | buffer fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c | else | edit fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal nofen
-silent! normal! zE
-let s:l = 2357 - ((10 * winheight(0) + 6) / 13)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2357
-normal! 021|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-2333,2335fold
-2342,2347fold
-2333
-normal! zc
-2342
-normal! zc
-let s:l = 2357 - ((24 * winheight(0) + 18) / 37)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2357
-normal! 015|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-2309,2314fold
-2316,2322fold
-2324,2327fold
-2308,2327fold
-2337,2391fold
-2308
-normal! zo
-2309
-normal! zc
-2316
-normal! zc
-2324
-normal! zc
-2337
-normal! zc
-let s:l = 2404 - ((71 * winheight(0) + 18) / 37)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2404
-normal! 09|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("~/projects/neovim/src/nvim/buffer_defs.h") | buffer ~/projects/neovim/src/nvim/buffer_defs.h | else | edit ~/projects/neovim/src/nvim/buffer_defs.h | endif
-setlocal fdm=indent
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 906 - ((12 * winheight(0) + 12) / 25)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-906
-normal! 03|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=20
-setlocal fml=1
-setlocal fdn=20
-setlocal nofen
-silent! normal! zE
-let s:l = 509 - ((6 * winheight(0) + 12) / 25)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-509
-normal! 016|
-lcd ~/projects/neovim
-wincmd w
-3wincmd w
-exe 'vert 1resize ' . ((&columns * 20 + 136) / 273)
-exe '2resize ' . ((&lines * 13 + 27) / 54)
-exe 'vert 2resize ' . ((&columns * 170 + 136) / 273)
-exe '3resize ' . ((&lines * 37 + 27) / 54)
-exe 'vert 3resize ' . ((&columns * 95 + 136) / 273)
-exe '4resize ' . ((&lines * 37 + 27) / 54)
-exe 'vert 4resize ' . ((&columns * 74 + 136) / 273)
-exe '5resize ' . ((&lines * 25 + 27) / 54)
-exe 'vert 5resize ' . ((&columns * 81 + 136) / 273)
-exe '6resize ' . ((&lines * 25 + 27) / 54)
-exe 'vert 6resize ' . ((&columns * 81 + 136) / 273)
 tabedit ~/projects/neovim/src/nvim/diff.c
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -1504,29 +1322,11 @@ setlocal fdl=20
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-514
-normal! zo
-1735
-normal! zo
-2298
-normal! zo
-2337
-normal! zo
-2340
-normal! zo
-2341
-normal! zo
-2342
-normal! zo
-2352
-normal! zo
-2359
-normal! zo
-let s:l = 2331 - ((6 * winheight(0) + 6) / 13)
+let s:l = 2333 - ((8 * winheight(0) + 6) / 13)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2331
+2333
 normal! 019|
 lcd ~/projects/neovim
 wincmd w
@@ -1558,12 +1358,12 @@ setlocal fdl=20
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 907 - ((25 * winheight(0) + 25) / 51)
+let s:l = 906 - ((23 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-907
-normal! 011|
+906
+normal! 07|
 lcd ~/projects/neovim
 wincmd w
 argglobal
@@ -1576,10 +1376,6 @@ setlocal fdl=20
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-514
-normal! zo
-1735
-normal! zo
 let s:l = 518 - ((13 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
@@ -1598,52 +1394,6 @@ setlocal fdl=20
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-273
-normal! zo
-306
-normal! zo
-448
-normal! zo
-469
-normal! zo
-478
-normal! zo
-536
-normal! zo
-559
-normal! zo
-562
-normal! zo
-1080
-normal! zo
-1092
-normal! zo
-1266
-normal! zo
-1351
-normal! zo
-1506
-normal! zo
-1535
-normal! zo
-1607
-normal! zo
-1735
-normal! zo
-1877
-normal! zo
-1886
-normal! zo
-2298
-normal! zo
-2584
-normal! zo
-2727
-normal! zo
-2736
-normal! zo
-2794
-normal! zo
 let s:l = 1732 - ((10 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
@@ -1661,7 +1411,1178 @@ exe '4resize ' . ((&lines * 25 + 27) / 54)
 exe 'vert 4resize ' . ((&columns * 97 + 136) / 273)
 exe '5resize ' . ((&lines * 25 + 27) / 54)
 exe 'vert 5resize ' . ((&columns * 97 + 136) / 273)
-tabnext 10
+tabedit ~/projects/neovim/src/nvim/diff.c
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd w
+wincmd w
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 20 + 136) / 273)
+exe '2resize ' . ((&lines * 3 + 27) / 54)
+exe 'vert 2resize ' . ((&columns * 214 + 136) / 273)
+exe '3resize ' . ((&lines * 47 + 27) / 54)
+exe 'vert 3resize ' . ((&columns * 59 + 136) / 273)
+exe '4resize ' . ((&lines * 47 + 27) / 54)
+exe 'vert 4resize ' . ((&columns * 108 + 136) / 273)
+exe '5resize ' . ((&lines * 47 + 27) / 54)
+exe 'vert 5resize ' . ((&columns * 45 + 136) / 273)
+exe '6resize ' . ((&lines * 25 + 27) / 54)
+exe 'vert 6resize ' . ((&columns * 37 + 136) / 273)
+exe '7resize ' . ((&lines * 25 + 27) / 54)
+exe 'vert 7resize ' . ((&columns * 37 + 136) / 273)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+let s:l = 2252 - ((5 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2252
+normal! 0
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c") | buffer fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c | else | edit fugitive:///home/zom/projects/neovim/.git//f12053a8942b2ea4e7d071e26c5baad9c306dd04/src/nvim/diff.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+let s:l = 2355 - ((1 * winheight(0) + 1) / 3)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2355
+normal! 021|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+2298,2335fold
+2343,2347fold
+2353,2359fold
+2361,2383fold
+2353,2385fold
+2391,2404fold
+2298
+normal! zc
+2343
+normal! zc
+2353
+normal! zo
+2353
+normal! zc
+2361
+normal! zc
+2391
+normal! zc
+let s:l = 2411 - ((113 * winheight(0) + 23) / 47)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2411
+normal! 09|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+2298,2335fold
+2343,2347fold
+2353,2359fold
+2361,2383fold
+2353,2385fold
+2391,2404fold
+2298
+normal! zc
+2343
+normal! zc
+2353
+normal! zo
+2353
+normal! zc
+2361
+normal! zc
+2391
+normal! zc
+let s:l = 2439 - ((17 * winheight(0) + 23) / 47)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2439
+normal! 09|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/screen.c") | buffer ~/projects/neovim/src/nvim/screen.c | else | edit ~/projects/neovim/src/nvim/screen.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 750 - ((28 * winheight(0) + 23) / 47)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+750
+normal! 015|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/buffer_defs.h") | buffer ~/projects/neovim/src/nvim/buffer_defs.h | else | edit ~/projects/neovim/src/nvim/buffer_defs.h | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+14,16fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+82,88fold
+123,127fold
+137,138fold
+145,148fold
+153,154fold
+163,262fold
+277,284fold
+294,296fold
+305,306fold
+322,330fold
+335,341fold
+349,359fold
+365,366fold
+381,388fold
+372,389fold
+410,413fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+433,433fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+446,446fold
+421,478fold
+487,493fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+496,496fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+527,527fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+537,537fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+539,539fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+545,545fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+547,548fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+556,556fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+558,558fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+561,561fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+568,568fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+571,571fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+573,573fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+577,577fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+584,584fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+593,593fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+631,631fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+806,806fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+823,823fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+831,831fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+833,834fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+840,840fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+843,844fold
+515,881fold
+905,908fold
+912,917fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+941,941fold
+931,950fold
+966,970fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+985,985fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+987,987fold
+978,990fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1005,1005fold
+1004,1014fold
+1023,1025fold
+1023,1025fold
+1033,1036fold
+1033,1036fold
+1045,1053fold
+1059,1060fold
+1070,1072fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1076,1076fold
+1079,1080fold
+1084,1096fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1100,1104fold
+1110,1113fold
+1120,1128fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1139,1139fold
+1134,1149fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1159,1159fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1174,1174fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1181,1182fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1185,1186fold
+1202,1211fold
+1216,1225fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1233,1233fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1235,1235fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1239,1239fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1242,1243fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1245,1245fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1260,1260fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1290,1290fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1305,1309fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1319,1319fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1322,1322fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1339,1339fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1341,1341fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1343,1343fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1351,1351fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1369,1369fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1373,1373fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1448,1448fold
+1156,1454fold
+1459,1459fold
+1464,1464fold
+1464,1464fold
+let s:l = 916 - ((14 * winheight(0) + 12) / 25)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+916
+normal! 0
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+let s:l = 511 - ((0 * winheight(0) + 12) / 25)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+511
+normal! 0
+lcd ~/projects/neovim
+wincmd w
+4wincmd w
+exe 'vert 1resize ' . ((&columns * 20 + 136) / 273)
+exe '2resize ' . ((&lines * 3 + 27) / 54)
+exe 'vert 2resize ' . ((&columns * 214 + 136) / 273)
+exe '3resize ' . ((&lines * 47 + 27) / 54)
+exe 'vert 3resize ' . ((&columns * 59 + 136) / 273)
+exe '4resize ' . ((&lines * 47 + 27) / 54)
+exe 'vert 4resize ' . ((&columns * 108 + 136) / 273)
+exe '5resize ' . ((&lines * 47 + 27) / 54)
+exe 'vert 5resize ' . ((&columns * 45 + 136) / 273)
+exe '6resize ' . ((&lines * 25 + 27) / 54)
+exe 'vert 6resize ' . ((&columns * 37 + 136) / 273)
+exe '7resize ' . ((&lines * 25 + 27) / 54)
+exe 'vert 7resize ' . ((&columns * 37 + 136) / 273)
+tabnew
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+if bufexists("term://.//109503:/bin/bash") | buffer term://.//109503:/bin/bash | else | edit term://.//109503:/bin/bash | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=20
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 259 - ((50 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+259
+normal! 039|
+lcd ~/projects/neovim
+tabnext 11
 set stal=1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
