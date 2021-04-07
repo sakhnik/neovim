@@ -1803,25 +1803,37 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 
 
 
+  // TODO
+  // call the code to create arrays of relative diff line mappings at a place where it's called before diff check runs
+
   // return this if the corresponding line in other buffer is a newly added line
+  const char_u* curline=ml_get_buf(curtab->tp_diffbuf[idx],lnum,false);
+  const char_u* testequals=(char_u*)"hello";
+  if(!STRCMP(curline,testequals)){
+          if(diffaddedr!=NULL)
+                *diffaddedr=1;
+          // return 1;
+	  int ttt=100;
+  }
+  // every time this is called, make sure 
   if(idx==dp->preferredbuffer){
     for(int j=0;j<DB_COUNT;++j){
       if((curtab->tp_diffbuf[j]!=NULL)&&(j!=idx)){
-	// TODO this logic will have to be updated for 3 diffs, probably use a min or max somewhere
-	if(  ((lnum-dp->df_lnum[idx]) > 0) && 
-	    ((lnum-dp->df_lnum[idx]) < (dp->df_count[idx]) )&&
-	     dp->comparisonlines[idx][j].mem[ lnum-dp->df_lnum[idx] ] !=-1 &&
-	     dp->comparisonlines[idx][j].mem[ lnum-dp->df_lnum[idx] ] !=
-	    (dp->comparisonlines[idx][j].mem[ lnum-1-dp->df_lnum[idx] ]+1)
-	  ){
-	  if(diffaddedr!=NULL)
-	    *diffaddedr=1;
-	  return ( 1
+        // TODO this logic will have to be updated for 3 diffs, probably use a min or max somewhere
+        if(  ((lnum-dp->df_lnum[idx]) > 0) && 
+            ((lnum-dp->df_lnum[idx]) < (dp->df_count[idx]) )&&
+             dp->comparisonlines[idx][j].mem[ lnum-dp->df_lnum[idx] ] !=-1 &&
+             dp->comparisonlines[idx][j].mem[ lnum-dp->df_lnum[idx] ] !=
+            (dp->comparisonlines[idx][j].mem[ lnum-1-dp->df_lnum[idx] ]+1)
+          ){
+          if(diffaddedr!=NULL)
+            *diffaddedr=1;
+          return (
 		dp->comparisonlines[idx][j].mem[ lnum-dp->df_lnum[idx] ] -
 		dp->comparisonlines[idx][j].mem[ lnum-1-dp->df_lnum[idx] ]
-		-1
-		);
-	}
+		-1 
+              );
+        }
       }
     }
   }else{
