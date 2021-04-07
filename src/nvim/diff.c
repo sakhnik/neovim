@@ -1899,16 +1899,6 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   }
   fclose(fp);
   // on first redraw iterate over all the diffs and figure out which lines to compare
-
-  // return this if the corresponding line in other buffer is a newly added line
-  const char_u* curline=ml_get_buf(curtab->tp_diffbuf[idx],lnum,false);
-  const char_u* testequals=(char_u*)"hello";
-  if(!STRCMP(curline,testequals)){
-          if(diffaddedr!=NULL)
-                *diffaddedr=1;
-          // return 1;
-	  int ttt=100;
-  }
   // every time this is called, make sure 
   if(idx==dp->preferredbuffer){
     for(int j=0;j<DB_COUNT;++j){
