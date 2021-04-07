@@ -651,7 +651,7 @@ void diff_redraw(bool dofold)
 
     // A change may have made filler lines invalid, need to take care
     // of that for other windows.
-    int n = diff_check(wp, wp->w_topline);
+    int n = diff_check(wp, wp->w_topline, NULL);
 
     if (((wp != curwin) && (wp->w_topfill > 0)) || (n > 0)) {
       if (wp->w_topfill > n) {
@@ -1754,7 +1754,7 @@ void diff_clear(tabpage_T *tp)
 /// @param lnum
 ///
 /// @return diff status.
-int diff_check(win_T *wp, linenr_T lnum)
+int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 {
   int idx; // index in tp_diffbuf[] for this buffer
   diff_T *dp;
@@ -1801,6 +1801,27 @@ int diff_check(win_T *wp, linenr_T lnum)
     return 0;
   }
 
+
+
+  // return this if the corresponding line in other buffer is a newly added line
+  const char_u* curline=ml_get_buf(curtab->tp_diffbuf[idx],lnum,false);
+  const char_u* testequals=(char_u*)"hello";
+  if(!STRCMP(curline,testequals)){
+          if(diffaddedr!=NULL)
+                *diffaddedr=1;
+          return 1;
+  }
+  // if(lnum==20 || lnum==6){
+  //         // if(diffaddedr!=NULL)
+  //         //       *diffaddedr=1;
+  //         return 1;
+  // }
+  // check if adjacent dp line is a newline
+  // if(dp->redraw==12347){
+  //   dp->redraw=10;
+  //   return 1;
+  // }
+  // if(*curline==*testequals)return 1337;
   if (lnum < dp->df_lnum[idx] + dp->df_count[idx]) {
     int zero = false;
 
@@ -1990,7 +2011,7 @@ int diff_check_fill(win_T *wp, linenr_T lnum)
   if (!(diff_flags & DIFF_FILLER)) {
     return 0;
   }
-  int n = diff_check(wp, lnum);
+  int n = diff_check(wp, lnum,NULL);
 
   if (n <= 0) {
     return 0;
@@ -2758,8 +2779,8 @@ void ex_diffgetput(exarg_T *eap)
     // the cursor line when there is no difference above the cursor.
     if ((eap->cmdidx == CMD_diffget)
         && (eap->line1 == curbuf->b_ml.ml_line_count)
-        && (diff_check(curwin, eap->line1) == 0)
-        && ((eap->line1 == 1) || (diff_check(curwin, eap->line1 - 1) == 0))) {
+        && (diff_check(curwin, eap->line1,NULL) == 0)
+        && ((eap->line1 == 1) || (diff_check(curwin, eap->line1 - 1,NULL) == 0))) {
       ++eap->line2;
     } else if (eap->line1 > 0) {
       --eap->line1;
