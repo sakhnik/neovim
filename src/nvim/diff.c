@@ -1998,13 +1998,22 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 
   // Insert filler lines above the line just below the change.  Will return
   // 0 when this buf had the max count.
-  maxcount = 0;
-  for (i = 0; i < DB_COUNT; ++i) {
-    if ((curtab->tp_diffbuf[i] != NULL) && (dp->df_count[i] > maxcount)) {
-      maxcount = dp->df_count[i];
+  if(idx==dp->preferredbuffer)return 0;
+  else{
+    // return the number of newlines added to preferredbuffer
+    maxcount = 0;
+    for(int j=0;j<dp->df_count[dp->preferredbuffer];j++){
+      if(dp->comparisonlines[dp->preferredbuffer][idx].mem[j]==-1)
+	maxcount++;
     }
   }
-  return maxcount - dp->df_count[idx];
+  return maxcount;
+  // for (i = 0; i < DB_COUNT; ++i) {
+  //   if ((curtab->tp_diffbuf[i] != NULL) && (dp->df_count[i] > maxcount)) {
+  //     maxcount = dp->df_count[i];
+  //   }
+  // }
+  // return maxcount - dp->df_count[idx];
 }
 
 /// Compare two entries in diff "dp" and return true if they are equal.
