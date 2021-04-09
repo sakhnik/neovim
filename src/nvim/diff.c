@@ -1998,7 +1998,19 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 
   // Insert filler lines above the line just below the change.  Will return
   // 0 when this buf had the max count.
-  if(idx==dp->preferredbuffer)return 0;
+  if(idx==dp->preferredbuffer){
+    maxcount=0;
+    // return the number of skips - the already drawn filler lines
+    // last line in other buffer was compared to:
+    for(int j=0;j<DB_COUNT;++j){
+      if((curtab->tp_diffbuf[j]!=NULL)&&(j!=idx)){
+	int lastlinecmp=dp->comparisonlines[dp->preferredbuffer][j].mem[
+	  dp->df_count[dp->preferredbuffer]-1 
+	  ];
+	return (dp->df_lnum[j] + dp->df_count[j] -1) - lastlinecmp;
+      }
+    }
+  }
   else{
     // return the number of newlines added to preferredbuffer
     maxcount = 0;
