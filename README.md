@@ -1,3 +1,21 @@
+# Improved Diff Mode Fork for neovim
+
+This fork was created to improve the diff mode of neovim to show more useful
+information when comparing lines between files in diff view. Line comparisons
+are made in a more useful way to show which lines are actually being added,
+changed, and deleted.
+
+## Before:
+<img src="images/diffmode2.png" width="500" height="400">  
+
+## After:
+<img src="images/diffmode1.png" width="500" height="400">  
+
+for discussion about this fork, see this
+[reddit post:](https://www.reddit.com/r/vim/comments/mkoaj8/an_improved_diff_mode_for_vim/)
+
+
+
 [![Neovim](https://raw.githubusercontent.com/neovim/neovim.github.io/master/logos/neovim-logo-300x87.png)](https://neovim.io)
 
 [Documentation](https://neovim.io/doc) |
