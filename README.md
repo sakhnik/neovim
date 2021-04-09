@@ -6,10 +6,10 @@ are made in a more useful way to show which lines are actually being added,
 changed, and deleted.
 
 ## Before:
-<img src="images/diffmode2.png" width="500" height="400">  
+<img src="images/diffmode2.png" width="700" height="400">  
 
 ## After:
-<img src="images/diffmode1.png" width="500" height="400">  
+<img src="images/diffmode1.png" width="700" height="400">  
 
 for discussion about this fork, see this
 [reddit post:](https://www.reddit.com/r/vim/comments/mkoaj8/an_improved_diff_mode_for_vim/)
