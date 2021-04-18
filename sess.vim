@@ -626,7 +626,7 @@ unlet s:cpo_save
 set completeopt=preview,menuone
 set cpoptions=aAceFs_B
 set noequalalways
-set errorfile=/tmp/nvimznDZSZ/224
+set errorfile=/tmp/nvimznDZSZ/269
 set foldlevelstart=20
 set formatoptions=jql
 set ignorecase
@@ -649,15 +649,15 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +80 README.md
-badd +1923 src/nvim/diff.c
+badd +1783 src/nvim/diff.c
 badd +2672 src/nvim/ex_cmds.c
 badd +1560 src/nvim/buffer.c
 badd +1 ~/projects/alg/AddString/main.cpp
 badd +230 src/nvim/ex_eval.c
 badd +1 ~/.local/share/nvim/log
-badd +748 src/nvim/screen.c
+badd +2355 src/nvim/screen.c
 badd +108 CMakeLists.txt
-badd +911 src/nvim/buffer_defs.h
+badd +917 src/nvim/buffer_defs.h
 badd +1176 src/nvim/move.c
 badd +6097 src/nvim/syntax.c
 badd +866 src/nvim/fold.c
@@ -705,6 +705,8 @@ badd +573 term://.//215326:/bin/bash
 badd +76 term://.//70919:/bin/bash
 badd +405 term://.//71718:/bin/bash
 badd +1 sess.vim
+badd +300 term://.//82106:/bin/bash
+badd +0 term://.//86153:/bin/bash
 argglobal
 %argdel
 $argadd ./
@@ -1783,11 +1785,11 @@ normal! zc
 normal! zc
 2015
 normal! zc
-let s:l = 2353 - ((3 * winheight(0) + 7) / 15)
+let s:l = 2354 - ((4 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2353
+2354
 normal! 011|
 lcd ~/projects/neovim
 wincmd w
@@ -2406,8 +2408,8 @@ silent! normal! zE
 1815,1907fold
 1809,1907fold
 1916,1936fold
-1943,1954fold
-1760,2040fold
+1943,1958fold
+1760,2062fold
 1760
 normal! zo
 1760
@@ -2572,9 +2574,9 @@ silent! normal! zE
 1815,1907fold
 1809,1907fold
 1916,1936fold
-1943,1954fold
-1760,2034fold
-1760,2040fold
+1943,1958fold
+1760,2056fold
+1760,2062fold
 1760
 normal! zo
 1760
@@ -2593,11 +2595,11 @@ normal! zo
 normal! zc
 1760
 normal! zc
-let s:l = 2039 - ((287 * winheight(0) + 17) / 35)
+let s:l = 2061 - ((309 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2039
+2061
 normal! 0
 lcd ~/projects/neovim
 wincmd w
@@ -2888,17 +2890,17 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2429,2441fold
-2445,2460fold
-2429
+2451,2463fold
+2467,2482fold
+2451
 normal! zc
-2445
+2467
 normal! zc
-let s:l = 2464 - ((45 * winheight(0) + 14) / 29)
+let s:l = 2486 - ((45 * winheight(0) + 14) / 29)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2464
+2486
 normal! 0
 lcd ~/projects/neovim
 wincmd w
@@ -3554,25 +3556,22 @@ exe 'vert 2resize ' . ((&columns * 90 + 136) / 273)
 exe '3resize ' . ((&lines * 33 + 27) / 54)
 exe 'vert 3resize ' . ((&columns * 90 + 136) / 273)
 exe 'vert 4resize ' . ((&columns * 81 + 136) / 273)
-tabedit ~/projects/neovim/src/nvim/screen.c
+tabedit ~/projects/neovim/src/nvim/buffer_defs.h
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
 wincmd _ | wincmd |
 vsplit
+2wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
 wincmd _ | wincmd |
 vsplit
-3wincmd h
+1wincmd h
 wincmd w
 wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
-wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
 wincmd w
 set nosplitbelow
 set nosplitright
@@ -3581,329 +3580,15 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 36 + 136) / 273)
+exe '1resize ' . ((&lines * 9 + 27) / 54)
+exe 'vert 1resize ' . ((&columns * 56 + 136) / 273)
+exe '2resize ' . ((&lines * 41 + 27) / 54)
 exe 'vert 2resize ' . ((&columns * 28 + 136) / 273)
-exe '3resize ' . ((&lines * 13 + 27) / 54)
-exe 'vert 3resize ' . ((&columns * 123 + 136) / 273)
-exe '4resize ' . ((&lines * 37 + 27) / 54)
-exe 'vert 4resize ' . ((&columns * 123 + 136) / 273)
-exe '5resize ' . ((&lines * 46 + 27) / 54)
-exe 'vert 5resize ' . ((&columns * 83 + 136) / 273)
-exe '6resize ' . ((&lines * 4 + 27) / 54)
-exe 'vert 6resize ' . ((&columns * 83 + 136) / 273)
+exe '3resize ' . ((&lines * 41 + 27) / 54)
+exe 'vert 3resize ' . ((&columns * 27 + 136) / 273)
+exe 'vert 4resize ' . ((&columns * 148 + 136) / 273)
+exe 'vert 5resize ' . ((&columns * 67 + 136) / 273)
 argglobal
-let s:cpo_save=&cpo
-set cpo&vim
-nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
-nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
-nmap <buffer>  hs <Plug>(GitGutterStageHunk)
-xmap <buffer>  hs <Plug>(GitGutterStageHunk)
-nmap <buffer> [c <Plug>(GitGutterPrevHunk)
-nmap <buffer> ]c <Plug>(GitGutterNextHunk)
-xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
-omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
-xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
-omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal backupcopy=
-setlocal nobinary
-set breakindent
-setlocal breakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal nocursorbind
-setlocal nocursorcolumn
-set cursorline
-setlocal cursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'c'
-setlocal filetype=c
-endif
-setlocal fillchars=
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=19
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=jcroql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-set linebreak
-setlocal linebreak
-setlocal nolisp
-setlocal lispwords=
-setlocal nolist
-setlocal listchars=tab:>\ ,trail:-,nbsp:+
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=bin,hex
-setlocal nonumber
-setlocal numberwidth=4
-setlocal omnifunc=ccomplete#Complete
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal scrollback=-1
-setlocal noscrollbind
-setlocal shiftwidth=8
-setlocal signcolumn=auto
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'c'
-setlocal syntax=c
-endif
-setlocal tabstop=8
-setlocal tagcase=
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal undofile
-setlocal undolevels=-123456
-setlocal winblend=0
-setlocal winhighlight=
-setlocal nowinfixheight
-setlocal nowinfixwidth
-set nowrap
-setlocal nowrap
-setlocal wrapmargin=0
-silent! normal! zE
-742,746fold
-742,746fold
-2015,2349fold
-742
-normal! zo
-742
-normal! zc
-742
-normal! zc
-2015
-normal! zc
-let s:l = 2353 - ((353 * winheight(0) + 25) / 51)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2353
-normal! 011|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
-let s:cpo_save=&cpo
-set cpo&vim
-nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
-nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
-nmap <buffer>  hs <Plug>(GitGutterStageHunk)
-xmap <buffer>  hs <Plug>(GitGutterStageHunk)
-nmap <buffer> [c <Plug>(GitGutterPrevHunk)
-nmap <buffer> ]c <Plug>(GitGutterNextHunk)
-xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
-omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
-xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
-omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal backupcopy=
-setlocal nobinary
-set breakindent
-setlocal breakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal nocursorbind
-setlocal nocursorcolumn
-set cursorline
-setlocal cursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'c'
-setlocal filetype=c
-endif
-setlocal fillchars=
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=4
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=jcroql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-set linebreak
-setlocal linebreak
-setlocal nolisp
-setlocal lispwords=
-setlocal nolist
-setlocal listchars=tab:>\ ,trail:-,nbsp:+
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=bin,hex
-setlocal nonumber
-setlocal numberwidth=4
-setlocal omnifunc=ccomplete#Complete
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal scrollback=-1
-setlocal noscrollbind
-setlocal shiftwidth=2
-setlocal signcolumn=auto
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!airline#statusline(2)
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'c'
-setlocal syntax=c
-endif
-setlocal tabstop=8
-setlocal tagcase=
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal undofile
-setlocal undolevels=-123456
-setlocal winblend=0
-setlocal winhighlight=
-setlocal nowinfixheight
-setlocal nowinfixwidth
-set nowrap
-setlocal nowrap
-setlocal wrapmargin=0
-silent! normal! zE
-1771,1772fold
-1760,1772fold
-1776,1777fold
-1781,1782fold
-1793,1794fold
-1798,1805fold
-1809,1814fold
-1815,1907fold
-1809,1907fold
-1916,1936fold
-1943,1954fold
-1760,2034fold
-1760,2040fold
-2474,2503fold
-2474,2505fold
-2474
-normal! zo
-2474
-normal! zc
-let s:l = 2509 - ((46 * winheight(0) + 25) / 51)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2509
-normal! 05|
-lcd ~/projects/neovim
-wincmd w
-argglobal
-if bufexists("~/projects/neovim/src/nvim/buffer_defs.h") | buffer ~/projects/neovim/src/nvim/buffer_defs.h | else | edit ~/projects/neovim/src/nvim/buffer_defs.h | endif
 nmap <buffer>  [{
 let s:cpo_save=&cpo
 set cpo&vim
@@ -4028,7 +3713,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!airline#statusline(3)
+setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
@@ -4047,14 +3732,166 @@ setlocal winhighlight=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 set nowrap
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 916 - ((6 * winheight(0) + 6) / 13)
+let s:l = 914 - ((3 * winheight(0) + 4) / 9)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-916
+914
 normal! 03|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/screen.c") | buffer ~/projects/neovim/src/nvim/screen.c | else | edit ~/projects/neovim/src/nvim/screen.c | endif
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
+nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
+nmap <buffer>  hs <Plug>(GitGutterStageHunk)
+xmap <buffer>  hs <Plug>(GitGutterStageHunk)
+nmap <buffer> [c <Plug>(GitGutterPrevHunk)
+nmap <buffer> ]c <Plug>(GitGutterNextHunk)
+xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
+omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
+xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
+omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal nobinary
+set breakindent
+setlocal breakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorbind
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != 'c'
+setlocal filetype=c
+endif
+setlocal fillchars=
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=19
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=jcroql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal listchars=tab:>\ ,trail:-,nbsp:+
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,hex
+setlocal nonumber
+setlocal numberwidth=4
+setlocal omnifunc=ccomplete#Complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal scrollback=-1
+setlocal noscrollbind
+setlocal shiftwidth=8
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!airline#statusline(2)
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'c'
+setlocal syntax=c
+endif
+setlocal tabstop=8
+setlocal tagcase=
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal winblend=0
+setlocal winhighlight=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+silent! normal! zE
+742,746fold
+742,746fold
+2015,2349fold
+742
+normal! zo
+742
+normal! zc
+742
+normal! zc
+2015
+normal! zc
+let s:l = 2354 - ((347 * winheight(0) + 20) / 41)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2354
+normal! 011|
 lcd ~/projects/neovim
 wincmd w
 argglobal
@@ -4115,7 +3952,167 @@ setlocal foldcolumn=0
 setlocal foldenable
 setlocal foldexpr=0
 setlocal foldignore=#
-setlocal foldlevel=8
+setlocal foldlevel=4
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=jcroql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal listchars=tab:>\ ,trail:-,nbsp:+
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,hex
+setlocal nonumber
+setlocal numberwidth=4
+setlocal omnifunc=ccomplete#Complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal scrollback=-1
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!airline#statusline(3)
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'c'
+setlocal syntax=c
+endif
+setlocal tabstop=8
+setlocal tagcase=
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal winblend=0
+setlocal winhighlight=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+silent! normal! zE
+1771,1772fold
+1760,1772fold
+1776,1777fold
+1781,1782fold
+1793,1794fold
+1798,1805fold
+1809,1814fold
+1815,1907fold
+1809,1907fold
+1916,1936fold
+1943,1958fold
+1760,2056fold
+1760,2062fold
+2496,2525fold
+2496,2527fold
+2496
+normal! zo
+2496
+normal! zc
+let s:l = 2493 - ((6 * winheight(0) + 20) / 41)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2493
+normal! 06|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
+nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
+nmap <buffer>  hs <Plug>(GitGutterStageHunk)
+xmap <buffer>  hs <Plug>(GitGutterStageHunk)
+nmap <buffer> [c <Plug>(GitGutterPrevHunk)
+nmap <buffer> ]c <Plug>(GitGutterNextHunk)
+xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
+omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
+xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
+omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal nobinary
+set breakindent
+setlocal breakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorbind
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != 'c'
+setlocal filetype=c
+endif
+setlocal fillchars=
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
 setlocal foldmarker={{{,}}}
 setlocal foldmethod=manual
 setlocal foldminlines=1
@@ -4190,54 +4187,42 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-1771,1772fold
-1760,1772fold
-1776,1777fold
-1781,1782fold
 1760,1782fold
-1760,1782fold
-1793,1794fold
-1798,1805fold
-1789,1808fold
-1809,1819fold
-1789,1819fold
-1789,1819fold
-1760,1819fold
-1760,1819fold
+1785,1787fold
+1785,1787fold
+1821,1903fold
+1789,1907fold
 1760,1907fold
-1930,1933fold
-1760,1958fold
-1960,1979fold
-1960,1979fold
-1982,1985fold
-1989,1999fold
-2003,2013fold
-2015,2020fold
-1981,2024fold
-2474,2503fold
-2474,2505fold
+1909,1915fold
+1918,1920fold
+1929,1933fold
+1928,1942fold
+1918,1956fold
+1918,1956fold
+1964,1969fold
+1982,2001fold
+2004,2007fold
+2003,2046fold
 1760
 normal! zo
-1760
+1785
 normal! zo
-1760
-normal! zc
-1960
+1785
 normal! zo
-1960
-normal! zc
-1981
+1789
 normal! zo
-1982
+1789
 normal! zc
-1981
-normal! zc
-let s:l = 1923 - ((165 * winheight(0) + 18) / 37)
+1918
+normal! zo
+1918
+normal! zo
+let s:l = 1783 - ((32 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1923
-normal! 013|
+1783
+normal! 03|
 lcd ~/projects/neovim
 wincmd w
 argglobal
@@ -4393,38 +4378,51 @@ normal! zc
 normal! zo
 1875
 normal! zc
-let s:l = 1848 - ((28 * winheight(0) + 23) / 46)
+let s:l = 1846 - ((91 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1848
+1846
 normal! 019|
 lcd ~/projects/neovim
 wincmd w
+4wincmd w
+exe '1resize ' . ((&lines * 9 + 27) / 54)
+exe 'vert 1resize ' . ((&columns * 56 + 136) / 273)
+exe '2resize ' . ((&lines * 41 + 27) / 54)
+exe 'vert 2resize ' . ((&columns * 28 + 136) / 273)
+exe '3resize ' . ((&lines * 41 + 27) / 54)
+exe 'vert 3resize ' . ((&columns * 27 + 136) / 273)
+exe 'vert 4resize ' . ((&columns * 148 + 136) / 273)
+exe 'vert 5resize ' . ((&columns * 67 + 136) / 273)
+tabedit ~/projects/neovim/src/nvim/diff.c
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 106 + 136) / 273)
+exe 'vert 2resize ' . ((&columns * 166 + 136) / 273)
 argglobal
-enew
 let s:cpo_save=&cpo
 set cpo&vim
 nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
 nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
 nmap <buffer>  hs <Plug>(GitGutterStageHunk)
 xmap <buffer>  hs <Plug>(GitGutterStageHunk)
-nnoremap <buffer> <silent> H Kb
-nnoremap <buffer> <silent> T TgT
 nmap <buffer> [c <Plug>(GitGutterPrevHunk)
 nmap <buffer> ]c <Plug>(GitGutterNextHunk)
 xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
 omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
-nnoremap <buffer> <silent> e :cclose
-nnoremap <buffer> <silent> gv :let b:height=winheight(0)H:copenJ:exe printf(":normal %d\<c-w>_", b:height)
-nnoremap <buffer> <silent> go :copen
-nnoremap <buffer> <silent> h K
 xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
 omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
-nnoremap <buffer> <silent> o 
-nnoremap <buffer> <silent> q :cclose
-nnoremap <buffer> <silent> t T
-nnoremap <buffer> <silent> v HbJt
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -4435,9 +4433,328 @@ setlocal nobinary
 set breakindent
 setlocal breakindent
 setlocal breakindentopt=
-setlocal bufhidden=wipe
+setlocal bufhidden=
 setlocal buflisted
-setlocal buftype=quickfix
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorbind
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != 'c'
+setlocal filetype=c
+endif
+setlocal fillchars=
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=3
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=jcroql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal listchars=tab:>\ ,trail:-,nbsp:+
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=ccomplete#Complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal scrollback=-1
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!airline#statusline(1)
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'c'
+setlocal syntax=c
+endif
+setlocal tabstop=8
+setlocal tagcase=
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal winblend=0
+setlocal winhighlight=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+silent! normal! zE
+1826,1831fold
+1837,1869fold
+1875,1888fold
+1952,1954fold
+1952,2043fold
+1,1951fold
+1986,3450fold
+1
+normal! zo
+1826
+normal! zc
+1875
+normal! zc
+let s:l = 1870 - ((50 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1870
+normal! 011|
+lcd ~/projects/neovim
+wincmd w
+argglobal
+if bufexists("~/projects/neovim/src/nvim/diff.c") | buffer ~/projects/neovim/src/nvim/diff.c | else | edit ~/projects/neovim/src/nvim/diff.c | endif
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
+nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
+nmap <buffer>  hs <Plug>(GitGutterStageHunk)
+xmap <buffer>  hs <Plug>(GitGutterStageHunk)
+nmap <buffer> [c <Plug>(GitGutterPrevHunk)
+nmap <buffer> ]c <Plug>(GitGutterNextHunk)
+xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
+omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
+xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
+omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal nobinary
+set breakindent
+setlocal breakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorbind
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != 'c'
+setlocal filetype=c
+endif
+setlocal fillchars=
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=3
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=jcroql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal listchars=tab:>\ ,trail:-,nbsp:+
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=ccomplete#Complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal scrollback=-1
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!airline#statusline(2)
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'c'
+setlocal syntax=c
+endif
+setlocal tabstop=8
+setlocal tagcase=
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal undolevels=-123456
+setlocal winblend=0
+setlocal winhighlight=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+silent! normal! zE
+1826,1831fold
+1837,1869fold
+1875,1888fold
+1952,1954fold
+1952,2043fold
+1,1951fold
+1986,3450fold
+1
+normal! zo
+let s:l = 1836 - ((16 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1836
+normal! 013|
+lcd ~/projects/neovim
+wincmd w
+exe 'vert 1resize ' . ((&columns * 106 + 136) / 273)
+exe 'vert 2resize ' . ((&columns * 166 + 136) / 273)
+tabnew
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+if bufexists("term://.//86153:/bin/bash") | buffer term://.//86153:/bin/bash | else | edit term://.//86153:/bin/bash | endif
+nnoremap <buffer>  nn yiwaVVnpa
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer>  hp <Plug>(GitGutterPreviewHunk)
+nmap <buffer>  hu <Plug>(GitGutterUndoHunk)
+nmap <buffer>  hs <Plug>(GitGutterStageHunk)
+xmap <buffer>  hs <Plug>(GitGutterStageHunk)
+nmap <buffer> [c <Plug>(GitGutterPrevHunk)
+nmap <buffer> ]c <Plug>(GitGutterNextHunk)
+xmap <buffer> ac <Plug>(GitGutterTextObjectOuterVisual)
+omap <buffer> ac <Plug>(GitGutterTextObjectOuterPending)
+xmap <buffer> ic <Plug>(GitGutterTextObjectInnerVisual)
+omap <buffer> ic <Plug>(GitGutterTextObjectInnerPending)
+nnoremap <buffer> r ak
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal nobinary
+set breakindent
+setlocal breakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=terminal
 setlocal nocindent
 setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
@@ -4458,10 +4775,10 @@ setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
-setlocal errorformat=%*[^\"]\"%f\"%*\\D%l:\ %m,\"%f\"%*\\D%l:\ %m,%-G%f:%l:\ (Each\ undeclared\ identifier\ is\ reported\ only\ once,%-G%f:%l:\ for\ each\ function\ it\ appears\ in.),%-GIn\ file\ included\ from\ %f:%l:%c:,%-GIn\ file\ included\ from\ %f:%l:%c\\,,%-GIn\ file\ included\ from\ %f:%l:%c,%-GIn\ file\ included\ from\ %f:%l,%-G%*[\ ]from\ %f:%l:%c,%-G%*[\ ]from\ %f:%l:,%-G%*[\ ]from\ %f:%l\\,,%-G%*[\ ]from\ %f:%l,%f:%l:%c:%m,%f(%l):%m,%f:%l:%m,\"%f\"\\,\ line\ %l%*\\D%c%*[^\ ]\ %m,%D%*\\a[%*\\d]:\ Entering\ directory\ %*[`']%f',%X%*\\a[%*\\d]:\ Leaving\ directory\ %*[`']%f',%D%*\\a:\ Entering\ directory\ %*[`']%f',%X%*\\a:\ Leaving\ directory\ %*[`']%f',%DMaking\ %*\\a\ in\ %f,%f|%l|\ %m
+setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'qf'
-setlocal filetype=qf
+if &filetype != ''
+setlocal filetype=
 endif
 setlocal fillchars=
 setlocal fixendofline
@@ -4496,12 +4813,12 @@ setlocal lispwords=
 setlocal nolist
 setlocal listchars=tab:>\ ,trail:-,nbsp:+
 setlocal makeencoding=
-setlocal makeprg=make
+setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal nomodifiable
 setlocal nrformats=bin,hex
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
@@ -4512,7 +4829,7 @@ setlocal noreadonly
 setlocal norelativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
-setlocal scrollback=-1
+setlocal scrollback=10000
 setlocal noscrollbind
 setlocal shiftwidth=2
 setlocal signcolumn=auto
@@ -4522,12 +4839,12 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!airline#statusline(6)
+setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'qf'
-setlocal syntax=qf
+if &syntax != ''
+setlocal syntax=
 endif
 setlocal tabstop=8
 setlocal tagcase=
@@ -4535,27 +4852,21 @@ setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal undofile
-setlocal undolevels=-123456
+setlocal undolevels=-1
 setlocal winblend=0
 setlocal winhighlight=
-setlocal winfixheight
+setlocal nowinfixheight
 setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
+let s:l = 844 - ((50 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+844
+normal! 039|
 lcd ~/projects/neovim
-wincmd w
-4wincmd w
-exe 'vert 1resize ' . ((&columns * 36 + 136) / 273)
-exe 'vert 2resize ' . ((&columns * 28 + 136) / 273)
-exe '3resize ' . ((&lines * 13 + 27) / 54)
-exe 'vert 3resize ' . ((&columns * 123 + 136) / 273)
-exe '4resize ' . ((&lines * 37 + 27) / 54)
-exe 'vert 4resize ' . ((&columns * 123 + 136) / 273)
-exe '5resize ' . ((&lines * 46 + 27) / 54)
-exe 'vert 5resize ' . ((&columns * 83 + 136) / 273)
-exe '6resize ' . ((&lines * 4 + 27) / 54)
-exe 'vert 6resize ' . ((&columns * 83 + 136) / 273)
 tabnext 5
 set stal=1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
