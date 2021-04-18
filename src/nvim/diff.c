@@ -1780,8 +1780,8 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   }
 
   idx = diff_buf_idx(buf);
-  // DEBUG ONLY
-  // if(lnum>1 && lnum <20){
+  // // DEBUG ONLY
+  // if(lnum>1 && lnum <40){
   //   char_u*prevline=ml_get_buf(curtab->tp_diffbuf[idx],lnum-1,false);
   //   char_u*thisline=ml_get_buf(curtab->tp_diffbuf[idx],lnum,false);
   //   int a=5;
@@ -1949,6 +1949,10 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	      (dp->df_lnum[j]+dp->df_count[j]-1) - // the last line of j diff
 	      (dp->comparisonlines[idx][j].mem[dp->df_count[idx]-1]) // last line that was compared to
 	    );
+	}else if( (lnum == dp->df_lnum[idx]+dp->df_count[idx]) &&
+		  (dp->df_count[idx]==0) // this is a zero line diff
+		  ){
+	  return dp->df_count[j];
 	}
       }
     }
