@@ -1955,6 +1955,24 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   }else{
     // set skip lines in non preferred buffer
     // TODO add logic if not the preferred buffer
+    for(int j=0;j<DB_COUNT;++j){
+      if((curtab->tp_diffbuf[j]!=NULL)&&(j!=idx)){
+	// for this case, we consider only two buffers.. so j is always the preferred buffer in this case
+
+	// comparing first line?
+	// lnum
+
+	// comparing last line?
+	if(lnum == dp->df_lnum[idx]+dp->df_count[idx]){
+	  // count the number of added lines at the end of the preferred buffer
+	  int skipped=0,k=dp->df_count[j]-1;
+	  while(k>=0 && dp->comparisonlines[j][idx].mem[k]==-1)skipped++,k--;
+	  return skipped;
+
+	}
+
+      }
+    }
 
   }
   // dp->comparisonlines[idx][]
