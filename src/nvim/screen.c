@@ -745,7 +745,7 @@ static void win_update(win_T *wp, Providers *providers)
 	  //         }
 	  // }
 	  for(int i=0;i<DB_COUNT;i++){
-	    dp->skipped[i]=INT_MIN;
+	    dp->df_max_skipped[i]=INT_MIN;
 	  }
 	  dp->preferredbuffer=-1;
 	  dp->redraw=true;

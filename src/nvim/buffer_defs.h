@@ -913,7 +913,7 @@ struct diffblock_S {
   linenr_T df_lnum[DB_COUNT];           // line number in buffer
   linenr_T df_count[DB_COUNT];          // nr of inserted/changed lines
   diffcomparisonlines_T comparisonlines[DB_COUNT][DB_COUNT]; // for diffing below threshold only
-  int skipped[DB_COUNT]; // minimum number of lines skipped when comparing to other buffers
+  int df_max_skipped[DB_COUNT]; // minimum number of lines skipped when comparing to other buffers
   int redraw; // calculate which lines should be diffed with eachother
   int preferredbuffer;
 };

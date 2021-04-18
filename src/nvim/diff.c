@@ -1780,7 +1780,12 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   }
 
   idx = diff_buf_idx(buf);
-
+  // DEBUG ONLY
+  // if(lnum>1 && lnum <20){
+  //   char_u*prevline=ml_get_buf(curtab->tp_diffbuf[idx],lnum-1,false);
+  //   char_u*thisline=ml_get_buf(curtab->tp_diffbuf[idx],lnum,false);
+  //   int a=5;
+  // }
   if (idx == DB_COUNT) {
     // no diffs for buffer "buf"
     return 0;
@@ -1864,8 +1869,8 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	    // add remaining lines to skipped
 	  }
 	  // keep track of how many have been skipped
-	  if(dp->skipped[i]<skipped){
-	    dp->skipped[i]=skipped;
+	  if(dp->df_max_skipped[i]<skipped){
+	    dp->df_max_skipped[i]=skipped;
 	  }
 
 
@@ -1889,8 +1894,8 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
     int leastnumberofskips=INT_MAX;
     for(i=0;i<DB_COUNT;i++){
       if((curtab->tp_diffbuf[i]!=NULL)){
-	if(dp->skipped[i] < leastnumberofskips){
-	  leastnumberofskips=dp->skipped[i];
+	if(dp->df_max_skipped[i] < leastnumberofskips){
+	  leastnumberofskips=dp->df_max_skipped[i];
 	  dp->preferredbuffer=i;
 	}
       }
@@ -1901,10 +1906,27 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   // on first redraw iterate over all the diffs and figure out which lines to compare
   // every time this is called, make sure 
   if(idx==dp->preferredbuffer){
+    // make a return for all possible cases of lines skipped
+
+    // when returning changed line with added lines above it
+    // diffaddedr: true
+    // return positive number
+    // if there should be no filler lines above it return -1
+
     for(int j=0;j<DB_COUNT;++j){
       if((curtab->tp_diffbuf[j]!=NULL)&&(j!=idx)){
         // TODO this logic will have to be updated for 3 diffs, probably use a min or max somewhere
-        if(  ((lnum-dp->df_lnum[idx]) > 0) && 
+
+	// comparing the first line?
+	if( (lnum - dp->df_lnum[idx]==0) && // the first line is being compared
+	    (dp->df_count[idx] > 0) && // there is atleast one line to compare in the this diff
+	    (dp->comparisonlines[idx][j].mem[0]!=dp->df_lnum[j]) // if the first line of diffs are not compared
+	    ){
+	  if(diffaddedr!=NULL)*diffaddedr=1;
+	  return dp->comparisonlines[idx][j].mem[0] - dp->df_lnum[j];
+	}
+	// comparing some lines in the middle of the diff
+	else if(  ((lnum-dp->df_lnum[idx]) > 0) && 
             ((lnum-dp->df_lnum[idx]) < (dp->df_count[idx]) )&&
              dp->comparisonlines[idx][j].mem[ lnum-dp->df_lnum[idx] ] !=-1 &&
              dp->comparisonlines[idx][j].mem[ lnum-dp->df_lnum[idx] ] !=
@@ -1918,9 +1940,20 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 		-1 
               );
         }
+	// drawing fillers below the last last line
+	else if((lnum == dp->df_lnum[idx]+dp->df_count[idx]) && // the last line
+		(dp->df_count[idx] > 0) // there is atleast one line to compare in the this diff
+	    ){
+	  if(dp->comparisonlines[idx][j].mem[dp->df_count[idx]-1]==-1) return 0;
+	  else return(
+	      (dp->df_lnum[j]+dp->df_count[j]-1) - // the last line of j diff
+	      (dp->comparisonlines[idx][j].mem[dp->df_count[idx]-1]) // last line that was compared to
+	    );
+	}
       }
     }
   }else{
+    // set skip lines in non preferred buffer
     // TODO add logic if not the preferred buffer
 
   }
@@ -1998,34 +2031,13 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 
   // Insert filler lines above the line just below the change.  Will return
   // 0 when this buf had the max count.
-  if(idx==dp->preferredbuffer){
-    maxcount=0;
-    // return the number of skips - the already drawn filler lines
-    // last line in other buffer was compared to:
-    for(int j=0;j<DB_COUNT;++j){
-      if((curtab->tp_diffbuf[j]!=NULL)&&(j!=idx)){
-	int lastlinecmp=dp->comparisonlines[dp->preferredbuffer][j].mem[
-	  dp->df_count[dp->preferredbuffer]-1 
-	  ];
-	return (dp->df_lnum[j] + dp->df_count[j] -1) - lastlinecmp;
-      }
+  maxcount = 0;
+  for (i = 0; i < DB_COUNT; ++i) {
+    if ((curtab->tp_diffbuf[i] != NULL) && (dp->df_count[i] > maxcount)) {
+      maxcount = dp->df_count[i];
     }
   }
-  else{
-    // return the number of newlines added to preferredbuffer
-    maxcount = 0;
-    for(int j=0;j<dp->df_count[dp->preferredbuffer];j++){
-      if(dp->comparisonlines[dp->preferredbuffer][idx].mem[j]==-1)
-	maxcount++;
-    }
-  }
-  return maxcount;
-  // for (i = 0; i < DB_COUNT; ++i) {
-  //   if ((curtab->tp_diffbuf[i] != NULL) && (dp->df_count[i] > maxcount)) {
-  //     maxcount = dp->df_count[i];
-  //   }
-  // }
-  // return maxcount - dp->df_count[idx];
+  return 0;
 }
 
 /// Compare two entries in diff "dp" and return true if they are equal.
@@ -2500,7 +2512,7 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
     if((curtab->tp_diffbuf[i]!=NULL)){
       fprintf(fp,"df_lnum[%i]: %li \n",i,dp->df_lnum[i]);
       fprintf(fp,"df_count[%i]: %li \n",i,dp->df_count[i]);
-      fprintf(fp,"skipped[%i]: %i \n",i,dp->skipped[i]);
+      fprintf(fp,"skipped[%i]: %i \n",i,dp->df_max_skipped[i]);
       fprintf(fp,"comparison lines: \n");
       for(int j=0;j<DB_COUNT;j++){
 	if((curtab->tp_diffbuf[j]!=NULL)&&(j!=i)){
