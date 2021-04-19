@@ -2241,23 +2241,32 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
       // safety check
       return;
     }
+
+    FILE*fp=fopen("debug.txt","a");
+    // for each line above
+
     // add the skipped lines here
     int filler_lines=0;
-    int n = diff_check(fromwin, fromwin->w_topline, NULL);
-    if(n>0)filler_lines+=n;
+    for(int k=dp->df_lnum[fromidx];k<=fromwin->w_topline;k++){
+      int n = diff_check(fromwin, k, NULL);
+      fprintf(fp,"how many fillers above: %i ? %i \n",k,n);
+      if(n>0)filler_lines+=n;
+    }
     int dfl=filler_lines - fromwin->w_topfill;
+
     towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]) + dfl;
 
     // get the total filler lines
-    FILE*fp=fopen("debug.txt","a");
     fprintf(fp,"---------------\n");
+    // fprintf(fp,"lnum: %li \n",lnum);
+    // fprintf(fp,"dp->df_lnum[fromidx]: %li \n",dp->df_lnum[fromidx]);
+    // fprintf(fp,"dp->df_lnum[toidx]: %li \n",dp->df_lnum[toidx]);
+    // fprintf(fp,"towin->w_topline: %li \n",towin->w_topline);
     fprintf(fp,"dfl: %i \n",dfl);
-    fprintf(fp,"lnum: %li \n",lnum);
     fprintf(fp,"filler_lines: %i \n",filler_lines);
     fprintf(fp,"fromwin->w_topfill: %i \n",fromwin->w_topfill);
-    fprintf(fp,"dp->df_lnum[fromidx]: %li \n",dp->df_lnum[fromidx]);
-    fprintf(fp,"dp->df_lnum[toidx]: %li \n",dp->df_lnum[toidx]);
-    fprintf(fp,"w_topline: %li \n",towin->w_topline);
+    fprintf(fp,"fromwin->w_topline: %li \n",fromwin->w_topline);
+    fprintf(fp,"dp->df_lnum[fromidx]: %li \n", dp->df_lnum[fromidx]);
     fclose(fp);
 
     // return;
