@@ -1033,6 +1033,13 @@ bool scrolldown(long line_count, int byfold)
 {
   int done = 0;                // total # of physical lines done
 
+  // FILE*fp=fopen("debug.txt","a");
+  // fprintf(fp,"---------------\n");
+  // fprintf(fp,"curwin pointer: %p \n",(void*)curwin);
+  // fprintf(fp,"scrolldown called: %li \n",line_count);
+  // fclose(fp);
+
+
   /* Make sure w_topline is at the first of a sequence of folded lines. */
   (void)hasFolding(curwin->w_topline, &curwin->w_topline, NULL);
   validate_cursor();            /* w_wrow needs to be valid */
@@ -1111,6 +1118,13 @@ bool scrollup(long line_count, int byfold)
 {
   linenr_T topline = curwin->w_topline;
   linenr_T botline = curwin->w_botline;
+
+  // // return 1;
+  // FILE*fp=fopen("debug.txt","a");
+  // fprintf(fp,"---------------\n");
+  // fprintf(fp,"curwin pointer: %p \n",(void*)curwin);
+  // fprintf(fp,"scrollUP called: %li \n",line_count);
+  // fclose(fp);
 
   if ((byfold && hasAnyFolding(curwin))
       || curwin->w_p_diff) {

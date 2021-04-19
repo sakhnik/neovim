@@ -1812,13 +1812,13 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   // TODO
   // call the code to create arrays of relative diff line mappings at a place where it's called before diff check runs
 
-  FILE*fp=fopen("debug.txt","a");
+  // FILE*fp=fopen("debug.txt","a");
   // fprintf(fp,"pointer: %p off:%i \n",(void*)dp,off);
   // lnum
   // figure out which lines to compare to what
   // fprintf(fp,"compare this: %s \n", line_org);
   if(dp->redraw){
-    fprintf(fp,"redraw all diffs\n");
+    // fprintf(fp,"redraw all diffs\n");
     // check which line numbers to compare to each other
     for(i=0;i<DB_COUNT;++i){
       for(int j=0;j<DB_COUNT;++j){
@@ -1902,7 +1902,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
     }
     dp->redraw=false;
   }
-  fclose(fp);
+  // fclose(fp);
   // on first redraw iterate over all the diffs and figure out which lines to compare
   // every time this is called, make sure 
   if(idx==dp->preferredbuffer){
@@ -2241,7 +2241,26 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
       // safety check
       return;
     }
-    towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]);
+    // add the skipped lines here
+    int filler_lines=0;
+    int n = diff_check(fromwin, fromwin->w_topline, NULL);
+    if(n>0)filler_lines+=n;
+    int dfl=filler_lines - fromwin->w_topfill;
+    towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]) + dfl;
+
+    // get the total filler lines
+    FILE*fp=fopen("debug.txt","a");
+    fprintf(fp,"---------------\n");
+    fprintf(fp,"dfl: %i \n",dfl);
+    fprintf(fp,"lnum: %li \n",lnum);
+    fprintf(fp,"filler_lines: %i \n",filler_lines);
+    fprintf(fp,"fromwin->w_topfill: %i \n",fromwin->w_topfill);
+    fprintf(fp,"dp->df_lnum[fromidx]: %li \n",dp->df_lnum[fromidx]);
+    fprintf(fp,"dp->df_lnum[toidx]: %li \n",dp->df_lnum[toidx]);
+    fprintf(fp,"w_topline: %li \n",towin->w_topline);
+    fclose(fp);
+
+    // return;
 
     if (lnum >= dp->df_lnum[fromidx]) {
       // Inside a change: compute filler lines. With three or more
@@ -2527,27 +2546,27 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
   // int off = lnum - dp->df_lnum[idx];
   int i;
   // print the preferred buffer + comparison lines:
-  FILE*fp=fopen("debug.txt","a");
-  fp=fopen("debug.txt","a");
-  fprintf(fp,"preferredbuffer: %i \n",dp->preferredbuffer);
-  for(i=0;i<DB_COUNT;++i){
-    if((curtab->tp_diffbuf[i]!=NULL)){
-      fprintf(fp,"df_lnum[%i]: %li \n",i,dp->df_lnum[i]);
-      fprintf(fp,"df_count[%i]: %li \n",i,dp->df_count[i]);
-      fprintf(fp,"skipped[%i]: %i \n",i,dp->df_max_skipped[i]);
-      fprintf(fp,"comparison lines: \n");
-      for(int j=0;j<DB_COUNT;j++){
-	if((curtab->tp_diffbuf[j]!=NULL)&&(j!=i)){
-	  for(int k=0;k<dp->df_count[i];k++){
-	    fprintf(fp,"comparisonlines[%i][%i].mem[%i]:%i",
-                i,j,k, dp->comparisonlines[i][j].mem[k]);
-            fprintf(fp," : -> %s \n",ml_get_buf(curtab->tp_diffbuf[i],dp->df_lnum[i]+k,false));
-	  }
-	}
-      }
-    }
-  }
-  fclose(fp);
+  // FILE*fp=fopen("debug.txt","a");
+  // fp=fopen("debug.txt","a");
+  // fprintf(fp,"preferredbuffer: %i \n",dp->preferredbuffer);
+  // for(i=0;i<DB_COUNT;++i){
+  //   if((curtab->tp_diffbuf[i]!=NULL)){
+  //     fprintf(fp,"df_lnum[%i]: %li \n",i,dp->df_lnum[i]);
+  //     fprintf(fp,"df_count[%i]: %li \n",i,dp->df_count[i]);
+  //     fprintf(fp,"skipped[%i]: %i \n",i,dp->df_max_skipped[i]);
+  //     fprintf(fp,"comparison lines: \n");
+  //     for(int j=0;j<DB_COUNT;j++){
+  //       if((curtab->tp_diffbuf[j]!=NULL)&&(j!=i)){
+  //         for(int k=0;k<dp->df_count[i];k++){
+  //           fprintf(fp,"comparisonlines[%i][%i].mem[%i]:%i",
+  //               i,j,k, dp->comparisonlines[i][j].mem[k]);
+  //           fprintf(fp," : -> %s \n",ml_get_buf(curtab->tp_diffbuf[i],dp->df_lnum[i]+k,false));
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // fclose(fp);
 
   for (i = 0; i < DB_COUNT; ++i) {
     if ((curtab->tp_diffbuf[i] != NULL) && (i != idx)) {
