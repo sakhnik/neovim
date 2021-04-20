@@ -1757,6 +1757,14 @@ void diff_clear(tabpage_T *tp)
 /// @return diff status.
 int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 {
+
+  // char_u* linetest;
+  // linetest=ml_get_buf(curtab->tp_diffbuf[idx],lnum,false);
+  // DEBUG ONLY
+  // if(lnum<12){
+  //   char_u *linetest=ml_get_buf(wp->w_buffer, lnum, false);
+  //   int a=5;
+  // }
   int idx; // index in tp_diffbuf[] for this buffer
   diff_T *dp;
   int maxcount;
@@ -1964,6 +1972,15 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	// for this case, we consider only two buffers.. so j is always the preferred buffer in this case
 
 	// comparing first line?
+      	bool foundline=false;
+	for(int k=0;k<dp->df_count[j];k++){
+	  if(dp->comparisonlines[j][idx].mem[k]==lnum){
+	    foundline=true;
+	  }
+	}
+	if(!foundline && lnum<(dp->df_lnum[idx]+dp->df_count[idx]))return -2;
+	// comparing some line in the middle that is added
+	// return -2
 	// lnum
 
 	// comparing last line?
@@ -2246,15 +2263,19 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
     // for each line above
 
     // add the skipped lines here
-    int filler_lines=0;
+    int from_filler_lines=0;
+    int from_added_lines=0;
     for(int k=dp->df_lnum[fromidx];k<=fromwin->w_topline;k++){
-      int n = diff_check(fromwin, k, NULL);
-      fprintf(fp,"how many fillers above: %i ? %i \n",k,n);
-      if(n>0)filler_lines+=n;
-    }
-    int dfl=filler_lines - fromwin->w_topfill;
 
-    towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]) + dfl;
+      bool diffaddedr=0;
+      int n = diff_check(fromwin, k, &diffaddedr);
+      fprintf(fp,"FROM: how many fillers / newlines above: %i ? %i - %i \n",k,n, diffaddedr);
+      // TODO also need to count the number of added lines, then need to add the top fill later
+      if(n>0)from_filler_lines+=n;
+      if(k<fromwin->w_topline && n==-2)from_added_lines++;
+    }
+    int dfl=from_filler_lines - fromwin->w_topfill;
+    towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]) + dfl - from_added_lines;
 
     // get the total filler lines
     fprintf(fp,"---------------\n");
@@ -2263,7 +2284,9 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
     // fprintf(fp,"dp->df_lnum[toidx]: %li \n",dp->df_lnum[toidx]);
     // fprintf(fp,"towin->w_topline: %li \n",towin->w_topline);
     fprintf(fp,"dfl: %i \n",dfl);
-    fprintf(fp,"filler_lines: %i \n",filler_lines);
+    fprintf(fp,"from_filler_lines: %i \n",from_filler_lines);
+    fprintf(fp,"from_added_lines: %i \n",from_added_lines);
+    // fprintf(fp,"to_filler_lines: %i \n",to_filler_lines);
     fprintf(fp,"fromwin->w_topfill: %i \n",fromwin->w_topfill);
     fprintf(fp,"fromwin->w_topline: %li \n",fromwin->w_topline);
     fprintf(fp,"dp->df_lnum[fromidx]: %li \n", dp->df_lnum[fromidx]);
