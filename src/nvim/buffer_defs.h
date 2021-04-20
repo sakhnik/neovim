@@ -886,6 +886,8 @@ struct file_buffer {
  */
 # define DB_COUNT 8     // up to four buffers can be diff'ed
 
+# define LINEMATCH_MAX_LINES 200
+
 /*
  * Each diffblock defines where a block of lines starts in each of the buffers
  * and how many lines it occupies in that buffer.  When the lines are missing
@@ -902,10 +904,10 @@ struct file_buffer {
  */
 typedef struct diffcomparisonlines_S diffcomparisonlines_T;
 struct diffcomparisonlines_S{
-  int size; // initial line number for a diff
+  // int size; // initial line number for a diff
   // int* mem;
-  int mem[200]; // dynamically alocate this
-  // TODO a diff with more than 100 lines would break this
+  int mem[LINEMATCH_MAX_LINES]; // dynamically alocate this
+  // TODO a diff with more than 200 lines would break this
 };
 typedef struct diffblock_S diff_T;
 struct diffblock_S {
