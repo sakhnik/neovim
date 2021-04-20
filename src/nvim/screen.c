@@ -736,7 +736,6 @@ bool win_cursorline_standout(const win_T *wp)
  */
 static void win_update(win_T *wp, Providers *providers)
 {
-  FILE*fp=fopen("debug.txt","a");
   // reset all the threshholds for diff comparions
   for(diff_T*dp=curtab->tp_first_diff;dp!=NULL;dp=dp->df_next){
 	  for(int i=0;i<DB_COUNT;i++){
@@ -745,8 +744,6 @@ static void win_update(win_T *wp, Providers *providers)
 	  dp->preferredbuffer=-1;
 	  dp->redraw=true;
   }
-  fprintf(fp,"window update called\n");
-  fclose(fp);
   buf_T       *buf = wp->w_buffer;
   int type;
   int top_end = 0;              /* Below last row of the top area that needs
