@@ -1331,7 +1331,7 @@ void ex_diffsplit(exarg_T *eap)
         if (bufref_valid(&old_curbuf)) {
           // Move the cursor position to that of the old window.
           curwin->w_cursor.lnum = diff_get_corresponding_line(
-              old_curbuf.br_buf, old_curwin->w_cursor.lnum);
+              old_curbuf.br_buf, old_curwin, old_curwin->w_cursor.lnum);
         }
       }
       // Now that lines are folded scroll to show the cursor at the same
@@ -3143,15 +3143,15 @@ int diff_move_to(int dir, long count)
 
 /// Return the line number in the current window that is closest to "lnum1" in
 /// "buf1" in diff mode.
-static linenr_T diff_get_corresponding_line_int(buf_T *buf1, linenr_T lnum1)
+static linenr_T diff_get_corresponding_line_int(buf_T *buf1,win_T* win1, linenr_T lnum1)
 {
   int idx1;
   int idx2;
   diff_T *dp;
   int baseline = 0;
 
-  idx1 = diff_buf_idx(buf1);
-  idx2 = diff_buf_idx(curbuf);
+  idx1 = diff_buf_idx(buf1); // the buffer where the user cursor is
+  idx2 = diff_buf_idx(curbuf); // the buffer being updated
 
   if ((idx1 == DB_COUNT)
       || (idx2 == DB_COUNT)
@@ -3177,9 +3177,28 @@ static linenr_T diff_get_corresponding_line_int(buf_T *buf1, linenr_T lnum1)
       // Inside the diffblock
       baseline = lnum1 - dp->df_lnum[idx1];
 
+      if(diff_linematch(dp)){
+	// add the number of lines skipped (above, in this buffer)
+	int skipped_lines_above=0;
+	// subtract the number of lines added (above, in this buffer)
+	int added_lines_above=0;
+	for(int k=dp->df_lnum[idx1];k<=lnum1;k++){
+	  bool diffaddedr=0;
+	  int n = diff_check(win1, k, &diffaddedr);
+	  if(n>0)skipped_lines_above+=n;
+	  if(n==-2)added_lines_above++;
+	}
+	// FILE*fp=fopen("debug.txt","a");
+	// fprintf(fp,"dp->df_lnum[idx2]+baseline : %li \n",dp->df_lnum[idx2]+baseline);
+	// fprintf(fp,"skipped_lines_above : %i \n",skipped_lines_above);
+	// fprintf(fp,"added_lines_above : %i \n",added_lines_above);
+	// fclose(fp);
+        return dp->df_lnum[idx2]+baseline+skipped_lines_above-added_lines_above;
+      }
       if (baseline > dp->df_count[idx2]) {
         baseline = dp->df_count[idx2];
       }
+
 
       return dp->df_lnum[idx2] + baseline;
     }
@@ -3209,9 +3228,9 @@ static linenr_T diff_get_corresponding_line_int(buf_T *buf1, linenr_T lnum1)
 /// @param lnum1
 ///
 /// @return The corresponding line.
-linenr_T diff_get_corresponding_line(buf_T *buf1, linenr_T lnum1)
+linenr_T diff_get_corresponding_line(buf_T *buf1, win_T *win1, linenr_T lnum1)
 {
-  linenr_T lnum = diff_get_corresponding_line_int(buf1, lnum1);
+  linenr_T lnum = diff_get_corresponding_line_int(buf1, win1, lnum1);
 
   // don't end up past the end of the file
   if (lnum > curbuf->b_ml.ml_line_count) {
