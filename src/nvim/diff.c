@@ -2264,7 +2264,7 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
 
     // add the skipped lines here
     int from_filler_lines=0;
-    int from_added_lines=0;
+    int from_added_lines_above=0;
     for(int k=dp->df_lnum[fromidx];k<=fromwin->w_topline;k++){
 
       bool diffaddedr=0;
@@ -2272,10 +2272,18 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
       fprintf(fp,"FROM: how many fillers / newlines above: %i ? %i - %i \n",k,n, diffaddedr);
       // TODO also need to count the number of added lines, then need to add the top fill later
       if(n>0)from_filler_lines+=n;
-      if(k<fromwin->w_topline && n==-2)from_added_lines++;
+      if(k<fromwin->w_topline && n==-2)from_added_lines_above++;
     }
     int dfl=from_filler_lines - fromwin->w_topfill;
-    towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]) + dfl - from_added_lines;
+    towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]) + dfl - from_added_lines_above;
+    int from_added_lines_below=0;
+    int k=fromwin->w_topline;
+    while(k < dp->df_lnum[fromidx]+dp->df_count[fromidx] && diff_check(fromwin,k,NULL)==-2){
+      from_added_lines_below++;
+      k++;
+    }
+
+    towin->w_topfill=from_added_lines_below; // number of added lines in the top of from buffer
 
     // get the total filler lines
     fprintf(fp,"---------------\n");
@@ -2284,15 +2292,16 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
     // fprintf(fp,"dp->df_lnum[toidx]: %li \n",dp->df_lnum[toidx]);
     // fprintf(fp,"towin->w_topline: %li \n",towin->w_topline);
     fprintf(fp,"dfl: %i \n",dfl);
+    fprintf(fp,"from_added_lines_below: %i \n",from_added_lines_below);
     fprintf(fp,"from_filler_lines: %i \n",from_filler_lines);
-    fprintf(fp,"from_added_lines: %i \n",from_added_lines);
+    fprintf(fp,"from_added_lines_above: %i \n",from_added_lines_above);
     // fprintf(fp,"to_filler_lines: %i \n",to_filler_lines);
     fprintf(fp,"fromwin->w_topfill: %i \n",fromwin->w_topfill);
     fprintf(fp,"fromwin->w_topline: %li \n",fromwin->w_topline);
     fprintf(fp,"dp->df_lnum[fromidx]: %li \n", dp->df_lnum[fromidx]);
     fclose(fp);
 
-    // return;
+    return;
 
     if (lnum >= dp->df_lnum[fromidx]) {
       // Inside a change: compute filler lines. With three or more
