@@ -741,8 +741,8 @@ static void win_update(win_T *wp, Providers *providers)
 	  for(int i=0;i<DB_COUNT;i++){
 	    dp->df_max_skipped[i]=INT_MIN;
 	  }
-	  dp->preferredbuffer=-1;
-	  dp->redraw=true;
+	  dp->df_preferredbuffer=-1;
+	  dp->df_redraw=true;
   }
   buf_T       *buf = wp->w_buffer;
   int type;
