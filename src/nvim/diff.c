@@ -2205,6 +2205,8 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
       }
       towin->w_topfill=from_added_lines_below; // number of added lines in the top of from buffer
       return;
+    }else{
+      towin->w_topline = lnum + (dp->df_lnum[toidx] - dp->df_lnum[fromidx]);
     }
 
     if (lnum >= dp->df_lnum[fromidx]) {
