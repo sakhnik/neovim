@@ -739,11 +739,6 @@ static void win_update(win_T *wp, Providers *providers)
   FILE*fp=fopen("debug.txt","a");
   // reset all the threshholds for diff comparions
   for(diff_T*dp=curtab->tp_first_diff;dp!=NULL;dp=dp->df_next){
-	  // for(int i=0;i<DB_COUNT;i++){
-	  //         for(int j=0;j<DB_COUNT;j++){
-	  //       	  dp->thresh[i][j]=-1;
-	  //         }
-	  // }
 	  for(int i=0;i<DB_COUNT;i++){
 	    dp->df_max_skipped[i]=INT_MIN;
 	  }
@@ -2361,10 +2356,6 @@ static int win_line(win_T *wp, linenr_T lnum, int startrow, int endrow,
     if(!diffaddedr)filler_lines = 0;
     area_highlighting = TRUE;
   }
-  // if(diffaddedr){
-  //         diff_hlf=HLF_ADD;
-  //         area_highlighting = TRUE;
-  // }
   if (lnum == wp->w_topline)
     filler_lines = wp->w_topfill;
   filler_todo = filler_lines;
