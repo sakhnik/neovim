@@ -858,6 +858,20 @@ int diff_internal(void)
   return (diff_flags & DIFF_INTERNAL) != 0 && *p_dex == NUL;
 }
 
+// return true of can use line match diff mode
+bool diff_linematch(void)
+{
+  // are there more than two diff buffers?
+  int diffbuffers=0;
+  for(int i=0;i<DB_COUNT;++i){
+    if(curtab->tp_diffbuf[i]!=NULL)diffbuffers++;
+  }
+  if(diffbuffers==2){
+    return (diff_flags & DIFF_LINEMATCH);
+  }
+  return 0;
+}
+
 ///
 /// Return true if the internal diff failed for one of the diff buffers.
 ///
@@ -1800,7 +1814,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
     return 0;
   }
 
-  if(dp->redraw && diff_flags & DIFF_LINEMATCH){
+  if(dp->redraw && diff_linematch()){
     // check which line numbers to compare to each other
     for(i=0;i<DB_COUNT;++i){
       for(int j=0;j<DB_COUNT;++j){
@@ -1860,7 +1874,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
     }
     dp->redraw=false;
   }
-  if(diff_flags & DIFF_LINEMATCH){
+  if(diff_linematch()){
     if(idx==dp->preferredbuffer){
       // make a return for all possible cases of lines skipped
       // when returning changed line with added lines above it
@@ -1998,7 +2012,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
       maxcount = dp->df_count[i];
     }
   }
-  return (diff_flags & DIFF_LINEMATCH)?0:maxcount - dp->df_count[idx];
+  return (diff_linematch())?0:maxcount - dp->df_count[idx];
 }
 
 /// Compare two entries in diff "dp" and return true if they are equal.
@@ -2181,7 +2195,7 @@ void diff_set_topline(win_T *fromwin, win_T *towin)
       return;
     }
 
-    if(diff_flags & DIFF_LINEMATCH){
+    if(diff_linematch()){
       // for each line above
 
       // add the skipped lines here
@@ -2499,7 +2513,7 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
     if ((curtab->tp_diffbuf[i] != NULL) && (i != idx)) {
       // Skip lines that are not in the other change (filler lines).
       int comparl;
-      if(diff_flags & DIFF_LINEMATCH){
+      if(diff_linematch()){
 	// get the line to compare to
 	if(dp->preferredbuffer==idx){
 	  comparl=dp->comparisonlines[idx][i].mem[ lnum - dp->df_lnum[idx]  ];
@@ -2531,7 +2545,7 @@ bool diff_find_change(win_T *wp, linenr_T lnum, int *startp, int *endp)
       }
       added = false;
       line_new = ml_get_buf(curtab->tp_diffbuf[i],
-                            (diff_flags & DIFF_LINEMATCH)?comparl:dp->df_lnum[i]+off, false);
+                            (diff_linematch())?comparl:dp->df_lnum[i]+off, false);
 
       // Search for start of difference
       si_org = si_new = 0;
