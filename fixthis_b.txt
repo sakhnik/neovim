@@ -1,0 +1,13 @@
+
+  idx = diff_buf_idx(buf);
+
+  if (idx == DB_COUNT) {
+    // no diffs for buffer "buf"
+    return 0;
+  }
+
+
+
+
+
+
