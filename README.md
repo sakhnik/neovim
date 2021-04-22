@@ -29,30 +29,23 @@ other buffer they should be compared to. As the line match diff mode currently
 only works for two buffers, the array is populated twice, once to compare buffer
 1 to buffer 2, and once to compare buffer 2 to buffer 1.
 
-<img src="images/exampletable.png" width="700" height="700">  
+<img src="images/exampletable.png" width="700" height="400">  
 
 Buffer 1 (left)
 This line | Most similar line in other buffer
 ------------- | -------------
 app = QtWidgets.QApplication(sys.argv) |  # app = QtWidgets.QApplication(sys.argv)
-
 MainWindow = QtWidgets.QMainWindow() | # MainWindow = QtWidgets.QMainWindow()
-
-ui = Ui_MainWindow() | # ui = Ui_MainWindow()
+ui = Ui\_MainWindow() | # ui = Ui\_MainWindow()
 
 Buffer 2 (right)
 This line | Most similar line in other buffer
 ------------- | -------------
-comment these things | ui = Ui_MainWindow()
-
+comment these things | ui = Ui\_MainWindow()
 \# app = QtWidgets.QApplication(sys.argv) | NONE
-
 \# MainWindow = QtWidgets.QMainWindow() | NONE
-
 and add a completely different line here | NONE
-
-\# ui = Ui_MainWindow() | NONE
-
+\# ui = Ui\_MainWindow() | NONE
 and another new line | NONE
 
 
