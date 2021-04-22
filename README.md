@@ -23,13 +23,13 @@ diff opt is disabled automatically when diffing more than two files at once.
 ## How it works:
 An algorithm is implemented to attempt to compare the most similar lines in each
 buffer, rather than only the side by side lines, as is the default diff mode
-behaviour. A two dimmensional array is populated for each diff block. The array
+behavior. A two dimensional array is populated for each diff block. The array
 is used to store the respective line numbers and show which line number in the
 other buffer they should be compared to. As the line match diff mode currently
 only works for two buffers, the array is populated twice, once to compare buffer
 1 to buffer 2, and once to compare buffer 2 to buffer 1.
 
-<img src="images/exampletable.png" width="700" height="400">  
+<img src="images/exampletable.png" width="700" height="300">  
 
 Buffer 1 (left)
 This line | Most similar line in other buffer
@@ -48,6 +48,51 @@ and add a completely different line here | NONE
 \# ui = Ui\_MainWindow() | NONE
 and another new line | NONE
 
+After the comparisons are made to reach respective buffer, the preferred diff
+buffer is chosen as the buffer which, when compared to the other, had the least
+amount of skipped lines. In the tables shown above, 'comment these things' is
+matched to Ui\_MainWindow() because the levenstein distance is the shortest.
+
+The code which performs this function can be found in diff.c
+
+```
+    for(i=0;i<DB_COUNT;++i){
+      for(int j=0;j<DB_COUNT;++j){ // i and j represent the comparison buffers, they are each compared with each other
+	if((curtab->tp_diffbuf[i]!=NULL)&&(curtab->tp_diffbuf[j]!=NULL)&&(i!=j)){
+	  char_u* lineoriginal;
+	  char_u* linenew;
+	  int skipped=0; // we keep track of how many lines have been skipped in this comparison
+	  int comparisonline=dp->df_lnum[j];
+	  for(int k=0;k<dp->df_count[i];k++){
+	    int thislinenumber=dp->df_lnum[i]+k; // the current line number in this diff block
+	    lineoriginal=ml_get_buf(curtab->tp_diffbuf[i],thislinenumber,false);
+	    dp->df_comparisonlines[i][j].mem[k]=-1; // initialize to -1 // which line are we comparing in the other buffer? default -1 for none
+	    int lowestscore=INT_MAX;
+	    if(comparisonline<dp->df_lnum[j]+dp->df_count[j]){
+	      int d_skipped=0;
+	      int comparisonlinestart=comparisonline;
+	      for(int cl=comparisonline;cl<dp->df_lnum[j]+dp->df_count[j];cl++){
+		linenew=ml_get_buf(curtab->tp_diffbuf[j],cl,false);
+		int score=levenshtein(lineoriginal,linenew); // calculate the levenstein distance
+		if(score<lowestscore){
+		  dp->df_comparisonlines[i][j].mem[k]=cl;
+		  lowestscore=score;
+		  d_skipped=(cl-comparisonlinestart);
+		  comparisonline=cl+1; // start the next comparison after this line only, so we cant compare a line that was above this
+		}
+	      }
+	      skipped+=d_skipped; // keep track of how many lines have been skipped to calculate the preferred diff buffer later
+	    }else skipped++;
+	  }
+	  if(dp->df_max_skipped[i]<skipped){
+	    dp->df_max_skipped[i]=skipped;
+	  }
+	}
+      }
+    }
+```
+When lines are skipped, an index is updated, such that one a line will always be
+compared to a line below the current comparison line index, never above it
 
 
 for discussion about this fork, see this
