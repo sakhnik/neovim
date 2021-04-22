@@ -19,6 +19,17 @@ enable this enhanced diff mode by using :set diffopt+=linematch. The line match
 diff opt is disabled automatically when diffing more than two files at once.
 
 ## Why is this not a plugin?
+This may be able to be converted to a plugin, but doing so would take much more
+work because the original diff mode would first need to be completely hidden.
+All the locations with diffs would need to be overwritten with the text from the
+linematch diff output. This would include writing text over locations which are
+marked as filler lines, which I don't believe is possible to do. Changing lines
+would need to be done on different "fake lines", because part of the
+functionality here moves around the lines to align them between the diff
+buffers.
+Additionally, By default the diff mode in vim is
+very bad compared to other editors like Emacs and vs-code, so by default VIM
+should have a comparable high quality diff view because other editors do.
 
 ## How it works:
 An algorithm is implemented to attempt to compare the most similar lines in each
@@ -99,6 +110,7 @@ for discussion about this fork, see this
 [reddit post:](https://www.reddit.com/r/vim/comments/mkoaj8/an_improved_diff_mode_for_vim/)
 
 
+## original neovim documentation:
 
 [![Neovim](https://raw.githubusercontent.com/neovim/neovim.github.io/master/logos/neovim-logo-300x87.png)](https://neovim.io)
 
