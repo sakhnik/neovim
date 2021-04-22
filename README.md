@@ -1,4 +1,4 @@
-# Improved Diff Mode Fork for neovim
+## linematch diff mode: Improved Diff Mode Fork for neovim
 
 This fork was created to improve the diff mode of neovim to show more useful
 information when comparing lines between files in diff view. Line comparisons
@@ -10,6 +10,52 @@ changed, and deleted.
 
 ## After:
 <img src="images/diff_after_3.png" width="700" height="400">  
+
+## In action:
+<img src="images/example.gif" width="700" height="700">  
+
+## How to use:
+enable this enhanced diff mode by using :set diffopt+=linematch. The line match
+diff opt is disabled automatically when diffing more than two files at once.
+
+## Why is this not a plugin?
+
+## How it works:
+An algorithm is implemented to attempt to compare the most similar lines in each
+buffer, rather than only the side by side lines, as is the default diff mode
+behaviour. A two dimmensional array is populated for each diff block. The array
+is used to store the respective line numbers and show which line number in the
+other buffer they should be compared to. As the line match diff mode currently
+only works for two buffers, the array is populated twice, once to compare buffer
+1 to buffer 2, and once to compare buffer 2 to buffer 1.
+
+<img src="images/exampletable.png" width="700" height="700">  
+
+Buffer 1 (left)
+This line | Most similar line in other buffer
+------------- | -------------
+app = QtWidgets.QApplication(sys.argv) |  # app = QtWidgets.QApplication(sys.argv)
+
+MainWindow = QtWidgets.QMainWindow() | # MainWindow = QtWidgets.QMainWindow()
+
+ui = Ui_MainWindow() | # ui = Ui_MainWindow()
+
+Buffer 2 (right)
+This line | Most similar line in other buffer
+------------- | -------------
+comment these things | ui = Ui_MainWindow()
+
+\# app = QtWidgets.QApplication(sys.argv) | NONE
+
+\# MainWindow = QtWidgets.QMainWindow() | NONE
+
+and add a completely different line here | NONE
+
+\# ui = Ui_MainWindow() | NONE
+
+and another new line | NONE
+
+
 
 for discussion about this fork, see this
 [reddit post:](https://www.reddit.com/r/vim/comments/mkoaj8/an_improved_diff_mode_for_vim/)
