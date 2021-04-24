@@ -1760,6 +1760,31 @@ void diff_clear(tabpage_T *tp)
   tp->tp_first_diff = NULL;
 }
 
+// debug print statement
+void print_dp(diff_T *dp){
+  int i;
+  for(i=0;i<DB_COUNT;++i){
+    if(curtab->tp_diffbuf[i]!=NULL){
+      dp->df_valid_buffers[dp->df_valid_buffers_max]=i;
+      dp->df_valid_buffers_max++;
+    }
+  }
+  FILE*fp=fopen("debug.txt","a");
+  fprintf(fp,"\n");
+  for(i=0;i<=dp->df_count[dp->df_valid_buffers[0]];i++){
+    for(int j=0;j<=dp->df_count[dp->df_valid_buffers[1]];j++){
+      fprintf(fp,"value:%-15i  ", dp->df_pathmatrix[i][j].df_lev_score);
+      fprintf(fp,"path_index:%-3i",dp->df_pathmatrix[i][j].path_index);
+      fprintf(fp,"pathvalues:");
+      for(int k=0;k<dp->df_pathmatrix[i][j].path_index;k++)
+	fprintf(fp,"%i,",dp->df_pathmatrix[i][j].df_path[k]);
+      fprintf(fp,"|||");
+    }fprintf(fp,"\n");
+  }
+  fclose(fp);
+}
+
+
 /// Check diff status for line "lnum" in buffer "buf":
 ///
 /// Returns 0 for nothing special
