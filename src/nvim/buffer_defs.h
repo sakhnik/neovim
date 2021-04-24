@@ -909,6 +909,12 @@ struct diffcomparisonlines_S{
   int mem[LINEMATCH_MAX_LINES]; // dynamically alocate this
   // TODO a diff with more than 200 lines would break this
 };
+typedef struct diffcomparisonpath_S diffcomparisonpath_T;
+struct diffcomparisonpath_S{
+  int df_path[LINEMATCH_MAX_LINES * LINEMATCH_MAX_LINES]; // TODO this would work for two buffers, raise to the power of the max number of buffers diffed
+  int df_lev_score; // to keep track of the total score of this path
+  int path_index;
+};
 typedef struct diffblock_S diff_T;
 struct diffblock_S {
   diff_T      *df_next;
@@ -918,6 +924,11 @@ struct diffblock_S {
   int df_max_skipped[DB_COUNT]; // minimum number of lines skipped when comparing to other buffers
   int df_redraw; // calculate which lines should be diffed with eachother
   int df_preferredbuffer;
+  // graph method
+  int df_valid_buffers[DB_COUNT];
+  int df_valid_buffers_max;
+  diffcomparisonpath_T df_pathmatrix[LINEMATCH_MAX_LINES][LINEMATCH_MAX_LINES]; // for two buffers
+
 };
 
 #define SNAP_HELP_IDX   0

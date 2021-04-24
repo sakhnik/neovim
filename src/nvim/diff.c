@@ -1826,6 +1826,99 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   if(dp->df_redraw && diff_linematch(dp)){
     fprintf(fp,"redraw all diffs\n");
     // check which line numbers to compare to each other
+    // construct 2d array
+    // get indexes of all buffers that are not null
+    dp->df_valid_buffers_max=0;
+    // make a nd array for all these buffers
+    for(i=0;i<DB_COUNT;++i){
+      if(curtab->tp_diffbuf[i]!=NULL){
+	dp->df_valid_buffers[dp->df_valid_buffers_max]=i;
+	dp->df_valid_buffers_max++;
+      }
+    }
+    // assume for now that it is two buffers
+    if(dp->df_valid_buffers_max==2){
+      // define the boundaries
+      for(int idc=0;idc<dp->df_valid_buffers_max;idc++){
+	int chbuf=dp->df_valid_buffers[idc];
+	for(i=0;i<=dp->df_count[chbuf];i++){
+	  char_u* thisline=(i)?
+	    ml_get_buf( curtab->tp_diffbuf[chbuf], dp->df_lnum[chbuf]+i-1, false):
+	    (char_u*)"\0";
+	  int strlength=0;
+	  while(thisline[strlength]!='\0')strlength++;
+	  if(idc==0){
+	    dp->df_pathmatrix[i][0].df_lev_score=(
+		(i)?(dp->df_pathmatrix[i-1][0].df_lev_score)+strlength
+		:strlength
+		);
+	    dp->df_pathmatrix[i][0].path_index=i;
+	    for(int k=0;k<i;k++)dp->df_pathmatrix[i][0].df_path[k]=1;
+	  }else if(idc==1){
+	    dp->df_pathmatrix[0][i].df_lev_score=(
+		(i)?(dp->df_pathmatrix[0][i-1].df_lev_score)+strlength
+		:strlength
+		);
+	    dp->df_pathmatrix[0][i].path_index=i;
+	    for(int k=0;k<i;k++)dp->df_pathmatrix[0][i].df_path[k]=3;
+	  }
+	}
+      }
+      // limits
+      for(i=1;i<=dp->df_count[dp->df_valid_buffers[0]];i++){
+	for(int j=1;j<=dp->df_count[dp->df_valid_buffers[1]];j++){
+	  int strlength;
+	  // skip line
+	  char_u*thisline;
+	  char_u*compline;
+
+	  dp->df_pathmatrix[i][j].df_lev_score=INT_MAX;
+
+	  strlength=0;
+	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]+i-1],false);
+	  while(thisline[strlength]!='\0')strlength++;
+	  int choice1=dp->df_pathmatrix[i-1][j].df_lev_score + strlength;
+	  if(choice1<dp->df_pathmatrix[i][j].df_lev_score){
+	    dp->df_pathmatrix[i][j].df_lev_score=choice1;
+	    for(int k=0;k<=dp->df_pathmatrix[i-1][j].path_index;k++)
+	      dp->df_pathmatrix[i][j].df_path[k]=dp->df_pathmatrix[i-1][j].df_path[k];
+	    dp->df_pathmatrix[i][j].path_index=dp->df_pathmatrix[i-1][j].path_index;
+	    dp->df_pathmatrix[i][j].df_path[dp->df_pathmatrix[i][j].path_index]=1; // this choice
+	    dp->df_pathmatrix[i][j].path_index++;
+	  }
+	  // compare this line
+	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]+i-1],false);
+	  compline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[1]],dp->df_lnum[dp->df_valid_buffers[1]+j-1],false);
+	  int choice2=dp->df_pathmatrix[i-1][j-1].df_lev_score+levenshtein(thisline,compline);
+	  if(choice2<dp->df_pathmatrix[i][j].df_lev_score){
+	    dp->df_pathmatrix[i][j].df_lev_score=choice2;
+	    for(int k=0;k<=dp->df_pathmatrix[i-1][j-1].path_index;k++)
+	      dp->df_pathmatrix[i][j].df_path[k]=dp->df_pathmatrix[i-1][j-1].df_path[k];
+	    dp->df_pathmatrix[i][j].path_index=dp->df_pathmatrix[i-1][j-1].path_index;
+	    dp->df_pathmatrix[i][j].df_path[dp->df_pathmatrix[i][j].path_index]=2; // this choice
+	    dp->df_pathmatrix[i][j].path_index++;
+	  }
+	  // skip line
+	  strlength=0;
+	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[1]],dp->df_lnum[dp->df_valid_buffers[1]+j-1],false);
+	  while(thisline[strlength]!='\0')strlength++;
+	  int choice3=dp->df_pathmatrix[i][j-1].df_lev_score + strlength;
+	  if(choice3<dp->df_pathmatrix[i][j].df_lev_score){
+	    dp->df_pathmatrix[i][j].df_lev_score=choice3;
+	    for(int k=0;k<=dp->df_pathmatrix[i][j-1].path_index;k++)
+	      dp->df_pathmatrix[i][j].df_path[k]=dp->df_pathmatrix[i][j-1].df_path[k];
+	    dp->df_pathmatrix[i][j].path_index=dp->df_pathmatrix[i][j-1].path_index;
+	    dp->df_pathmatrix[i][j].df_path[dp->df_pathmatrix[i][j].path_index]=3; // this choice
+	    dp->df_pathmatrix[i][j].path_index++;
+	  }
+
+
+
+	}
+      }
+      // dp->df_pathmatrix[i][j]
+
+    }
     for(i=0;i<DB_COUNT;++i){
       for(int j=0;j<DB_COUNT;++j){
 	if((curtab->tp_diffbuf[i]!=NULL)&&(curtab->tp_diffbuf[j]!=NULL)&&(i!=j)){
