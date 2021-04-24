@@ -1875,7 +1875,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	  dp->df_pathmatrix[i][j].df_lev_score=INT_MAX;
 
 	  strlength=0;
-	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]+i-1],false);
+	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]]+i-1,false);
 	  while(thisline[strlength]!='\0')strlength++;
 	  int choice1=dp->df_pathmatrix[i-1][j].df_lev_score + strlength;
 	  if(choice1<dp->df_pathmatrix[i][j].df_lev_score){
@@ -1887,8 +1887,8 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	    dp->df_pathmatrix[i][j].path_index++;
 	  }
 	  // compare this line
-	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]+i-1],false);
-	  compline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[1]],dp->df_lnum[dp->df_valid_buffers[1]+j-1],false);
+	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]]+i-1,false);
+	  compline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[1]],dp->df_lnum[dp->df_valid_buffers[1]]+j-1,false);
 	  int choice2=dp->df_pathmatrix[i-1][j-1].df_lev_score+levenshtein(thisline,compline);
 	  if(choice2<dp->df_pathmatrix[i][j].df_lev_score){
 	    dp->df_pathmatrix[i][j].df_lev_score=choice2;
@@ -1900,7 +1900,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	  }
 	  // skip line
 	  strlength=0;
-	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[1]],dp->df_lnum[dp->df_valid_buffers[1]+j-1],false);
+	  thisline=ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[1]],dp->df_lnum[dp->df_valid_buffers[1]]+j-1,false);
 	  while(thisline[strlength]!='\0')strlength++;
 	  int choice3=dp->df_pathmatrix[i][j-1].df_lev_score + strlength;
 	  if(choice3<dp->df_pathmatrix[i][j].df_lev_score){
