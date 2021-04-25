@@ -928,6 +928,8 @@ struct diffblock_S {
   int df_valid_buffers[DB_COUNT];
   int df_valid_buffers_max;
   diffcomparisonpath_T df_pathmatrix[LINEMATCH_MAX_LINES][LINEMATCH_MAX_LINES]; // for two buffers
+  int df_comparisonlines2[DB_COUNT][DB_COUNT][LINEMATCH_MAX_LINES][2];
+
 
 };
 

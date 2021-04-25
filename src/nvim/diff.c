@@ -1783,6 +1783,23 @@ void print_dp(diff_T *dp){
   }
   fclose(fp);
 }
+void print_complines(diff_T *dp){
+  // 0 compared to 1:
+  FILE*fp=fopen("debug.txt","a");
+  fprintf(fp,"print_complines call:\n");
+  for(int i=0;i<dp->df_count[dp->df_valid_buffers[1]];i++){
+    fprintf(fp,"line: %-15i",dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][i][0]);
+    fprintf(fp,"filler: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][i][1]);
+  }
+  fprintf(fp,"=======\n");
+  for(int i=0;i<dp->df_count[dp->df_valid_buffers[0]];i++){
+    fprintf(fp,"line: %-15i",dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][i][0]);
+    fprintf(fp,"filler: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][i][1]);
+  }
+  fprintf(fp,"======= \n");
+  fclose(fp);
+
+}
 
 
 /// Check diff status for line "lnum" in buffer "buf":
@@ -1936,9 +1953,39 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	    dp->df_pathmatrix[i][j].df_path[dp->df_pathmatrix[i][j].path_index]=3; // this choice
 	    dp->df_pathmatrix[i][j].path_index++;
 	  }
-
-
-
+	}
+      }
+      int p01=0,p10=0; // i, j
+      // initialize to zero
+      dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][0]=0;
+      dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][1]=0;
+      dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][0]=0;
+      dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][1]=0;
+      for(i=0;i<dp->df_pathmatrix[dp->df_count[dp->df_valid_buffers[0]]][dp->df_count[dp->df_valid_buffers[1]]].path_index;i++){
+	int p=dp->df_pathmatrix[dp->df_count[dp->df_valid_buffers[0]]][dp->df_count[dp->df_valid_buffers[1]]].df_path[i];
+	if(p==1){
+	  // line from buffer 0 was skipped
+	  dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][0]=-1; // new line
+	  dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][1]++; // increase filler
+	  p01++;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][0]=0;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][1]=0;
+	}else if(p==2){
+	  // the lines were compared
+	  dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][0]=p10; // compare
+	  dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][0]=p01; // compare
+	  p10++,p01++;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][0]=0;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][1]=0;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][0]=0;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][1]=0;
+	}else if(p==3){
+	  // line from buffer 1 was skipped
+	  dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][0]=-1; // new line
+	  dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][p01][1]++; // increase filler
+	  p10++;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][0]=0;
+	  dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][p10][1]=0;
 	}
       }
       // dp->df_pathmatrix[i][j]
