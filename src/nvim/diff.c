@@ -1788,11 +1788,13 @@ void print_complines(diff_T *dp){
   FILE*fp=fopen("debug.txt","a");
   fprintf(fp,"print_complines call:\n");
   for(int i=0;i<dp->df_count[dp->df_valid_buffers[1]];i++){
+    fprintf(fp,"%s \n",ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[1]],dp->df_lnum[dp->df_valid_buffers[1]]+i,false));
     fprintf(fp,"line: %-15i",dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][i][0]);
     fprintf(fp,"filler: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][i][1]);
   }
   fprintf(fp,"=======\n");
   for(int i=0;i<dp->df_count[dp->df_valid_buffers[0]];i++){
+    fprintf(fp,"%s \n",ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]]+i,false));
     fprintf(fp,"line: %-15i",dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][i][0]);
     fprintf(fp,"filler: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][i][1]);
   }
@@ -1863,10 +1865,10 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
   }
 
   int off = lnum - dp->df_lnum[idx];
-  FILE*fp=fopen("debug.txt","a");
-  fprintf(fp,"pointer: %p off:%i \n",(void*)dp,off);
+  // FILE*fp=fopen("debug.txt","a");
+  // fprintf(fp,"pointer: %p off:%i \n",(void*)dp,off);
   if(dp->df_redraw && diff_linematch(dp)){
-    fprintf(fp,"redraw all diffs\n");
+    // fprintf(fp,"redraw all diffs\n");
     // check which line numbers to compare to each other
     // construct 2d array
     // get indexes of all buffers that are not null
@@ -1989,17 +1991,19 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	}
       }
       // dp->df_pathmatrix[i][j]
+      print_complines(dp);
+      print_dp(dp);
 
     }
     for(i=0;i<DB_COUNT;++i){
       for(int j=0;j<DB_COUNT;++j){
 	if((curtab->tp_diffbuf[i]!=NULL)&&(curtab->tp_diffbuf[j]!=NULL)&&(i!=j)){
-	  fprintf(fp,"db: %i, df_lnum: %li, df_count: %lu \n",i,dp->df_lnum[i],dp->df_count[i]);
+	  // fprintf(fp,"db: %i, df_lnum: %li, df_count: %lu \n",i,dp->df_lnum[i],dp->df_count[i]);
 	  // create an list of line numbers to compare to other line numbers
-	  fprintf(fp,"comparison %i to %i is valid\n",i,j);
+	  // fprintf(fp,"comparison %i to %i is valid\n",i,j);
 	  // line from this buffer
 	  // start line:
-	  fprintf(fp,"original buffer:\n");
+	  // fprintf(fp,"original buffer:\n");
 	  char_u* lineoriginal;
 	  char_u* linenew;
 	  int skipped=0;
@@ -2007,7 +2011,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	  for(int k=0;k<dp->df_count[i];k++){
 	    int thislinenumber=dp->df_lnum[i]+k;
 	    lineoriginal=ml_get_buf(curtab->tp_diffbuf[i],thislinenumber,false);
-	    fprintf(fp,"k:%i lineoriginal: %s \n",k,lineoriginal);
+	    // fprintf(fp,"k:%i lineoriginal: %s \n",k,lineoriginal);
 	    dp->df_comparisonlines[i][j].mem[k]=-1; // initialize to -1
 	    // TODO stop the reverse search at this df_count[j] to ensure in bounds search
 	    // get the lowest score, set the comparison line to that
@@ -2018,7 +2022,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 	      for(int cl=comparisonline;cl<dp->df_lnum[j]+dp->df_count[j];cl++){
 		linenew=ml_get_buf(curtab->tp_diffbuf[j],cl,false);
 		int score=levenshtein(lineoriginal,linenew);
-		fprintf(fp,"linenew: %s ->score: %i",linenew,score);
+		// fprintf(fp,"linenew: %s ->score: %i",linenew,score);
 		if(score<lowestscore){
 		  // thislinenumber -> cl
 		  // for dp->something[i][j]->linemap[k]=cl;
@@ -2027,11 +2031,11 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
 		  // }
 		  dp->df_comparisonlines[i][j].mem[k]=cl;
 		  lowestscore=score;
-		  fprintf(fp,"->WINNER:setting comparisonline to:%i \n",cl);
+		  // fprintf(fp,"->WINNER:setting comparisonline to:%i \n",cl);
 		  d_skipped=(cl-comparisonlinestart);
 		  comparisonline=cl+1;
 		}else {
-		  fprintf(fp,"\n");
+		  // fprintf(fp,"\n");
 		}
 	      }
 	      skipped+=d_skipped;
@@ -2058,7 +2062,7 @@ int diff_check(win_T *wp, linenr_T lnum, bool* diffaddedr)
     }
     dp->df_redraw=false;
   }
-  fclose(fp);
+  // fclose(fp);
   if(diff_linematch(dp)){
     if(idx==dp->df_preferredbuffer){
       // make a return for all possible cases of lines skipped
