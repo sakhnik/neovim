@@ -1792,12 +1792,14 @@ void print_complines(diff_T *dp){
     fprintf(fp,"line: %-15i",dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][i][0]);
     fprintf(fp,"filler: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][i][1]);
   }
+  fprintf(fp,"filler at end: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[1]][dp->df_valid_buffers[0]][dp->df_count[dp->df_valid_buffers[1]]][1]);
   fprintf(fp,"=======\n");
   for(int i=0;i<dp->df_count[dp->df_valid_buffers[0]];i++){
     fprintf(fp,"%s \n",ml_get_buf(curtab->tp_diffbuf[dp->df_valid_buffers[0]],dp->df_lnum[dp->df_valid_buffers[0]]+i,false));
     fprintf(fp,"line: %-15i",dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][i][0]);
     fprintf(fp,"filler: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][i][1]);
   }
+  fprintf(fp,"filler at end: %-15i \n",dp->df_comparisonlines2[dp->df_valid_buffers[0]][dp->df_valid_buffers[1]][dp->df_count[dp->df_valid_buffers[0]]][1]);
   fprintf(fp,"======= \n");
   fclose(fp);
 
