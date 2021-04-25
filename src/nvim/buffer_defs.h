@@ -906,19 +906,17 @@ typedef struct diffcomparisonlines_S diffcomparisonlines_T;
 struct diffcomparisonlines_S{
   // int size; // initial line number for a diff
   // int* mem;
-  int mem[LINEMATCH_MAX_LINES];  // dynamically alocate this
-  // TODO(jwhite500): a diff with more than 200 lines would break this
+  int mem[LINEMATCH_MAX_LINES]; // dynamically alocate this
+  // TODO a diff with more than 200 lines would break this
 };
 typedef struct diffblock_S diff_T;
 struct diffblock_S {
   diff_T      *df_next;
   linenr_T df_lnum[DB_COUNT];           // line number in buffer
   linenr_T df_count[DB_COUNT];          // nr of inserted/changed lines
-  // for diffing below threshold only
-  diffcomparisonlines_T df_comparisonlines[DB_COUNT][DB_COUNT];
-  // minimum number of lines skipped when comparing to other buffers
-  int df_max_skipped[DB_COUNT];
-  int df_redraw;  // calculate which lines should be diffed with eachother
+  diffcomparisonlines_T df_comparisonlines[DB_COUNT][DB_COUNT]; // for diffing below threshold only
+  int df_max_skipped[DB_COUNT]; // minimum number of lines skipped when comparing to other buffers
+  int df_redraw; // calculate which lines should be diffed with eachother
   int df_preferredbuffer;
 };
 
